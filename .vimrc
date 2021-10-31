@@ -18,10 +18,17 @@ set hlsearch
 set fileformat=unix
 set nobinary
 set encoding=UTF-8
-set shell=/bin/zsh
 set formatoptions=jql
 set mouse=a
 set guicursor+=a:blinkon1
+
+" detect os and set shell accordingly
+let _os = system('if [[ $OSTYPE == "linux-gnu"* ]]; then echo "linux"; else echo "macos"; fi')
+if _os == "linux"
+    set shell=/bin/zsh
+elseif _os == "macos"
+    set shell=/usr/bin/zsh
+endif
 
 " Use a blinking upright bar cursor in Insert mode, a blinking block in normal
 if &term == 'xterm-256color' || &term == 'screen-256color'
@@ -181,6 +188,8 @@ let g:ycm_filetype_specific_completion_to_disable = {
 
 " Display hidden files
 let NERDTreeShowHidden=1
+
+let g:NERDTreeSortOrder = ['foo','\/$','[[extension]]']
 
 " Start NERDTree when Vim starts with a directory argument.
 autocmd StdinReadPre * let s:std_in=1
