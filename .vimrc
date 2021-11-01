@@ -77,6 +77,10 @@ inoremap <C-Z> <Esc>ui
 nnoremap <C-Y> <C-R>
 inoremap <C-Y> <Esc><C-R>i
 
+" Alt + Arrows to skip words
+nnoremap <A-Left> <C-Left>
+nnoremap <A-Right> <C-Right>
+
 " Ctrl+Alt+N and Ctrl+N to enter normal mode (habit from VSCode)
 nnoremap <C-N> <NOP>
 inoremap <C-N> <Esc>
