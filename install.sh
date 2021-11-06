@@ -52,5 +52,8 @@ cp $THIS_DIR/init.vim $HOME/.config/nvim
 echo "\ninstalling vim plugins..."
 vim +PluginInstall +qall
 
+echo "\ninstalling .gdbinit"
+cp $THIS_DIR/.gdbinit $HOME
+
 echo ""
 
