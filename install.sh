@@ -55,5 +55,10 @@ vim +PluginInstall +qall
 echo "\ninstalling .gdbinit"
 cp $THIS_DIR/.gdbinit $HOME
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "appending 'set startup-with-shell off' to ~/.gdbinit because macos"
+    echo "set startup-with-shell off" >> $HOME/.gdbinit;
+fi
+
 echo ""
 
