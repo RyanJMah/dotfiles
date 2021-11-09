@@ -93,6 +93,10 @@ inoremap <C-A-N> <Esc>
 nnoremap <C-L> <NOP>
 inoremap <C-L> <Esc>
 
+" Ctrl + B to toggle nerdtree
+nmap <C-B> :NERDTreeToggle<CR>
+
+
 " Alt+t to toggle terminal
 nnoremap <A-t> :call TermToggle(12)<CR>
 inoremap <A-t> <Esc>:call TermToggle(12)<CR>
@@ -136,7 +140,6 @@ call plug#end()
 
 set termguicolors
 let g:sonokai_style = "shusia"
-" let g:sonokai_style = "default"
 let g:airline_theme = "sonokai"
 let g:sonokai_disable_italic_comment = 1
 colorscheme sonokai
