@@ -8,6 +8,11 @@ function rc {
     printf "\e[5 q"
 }
 
+# shortcut to print github tokens
+function github_tokens {
+    cat $HOME/shared/Personal/github_tokens.txt
+}
+
 # aliases
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # linux
