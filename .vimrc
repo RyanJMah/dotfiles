@@ -22,6 +22,8 @@ set formatoptions=jql
 set mouse=a
 set guicursor+=a:blinkon1
 
+packadd termdebug
+
 " detect os and set shell accordingly
 let _os = system('if [[ $OSTYPE == "linux-gnu"* ]]; then echo "linux"; else echo "macos"; fi')
 if _os == "linux"
@@ -188,6 +190,12 @@ let g:ycm_filetype_specific_completion_to_disable = {
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
+" TERMDEBUG SETTINGS
+let g:termdebug_wide=1
+"-----------------------------------------------------------------------------------
+
+
+"-----------------------------------------------------------------------------------
 " NERDTREE SETTINGS
 
 " Display hidden files
@@ -243,9 +251,6 @@ let g:vimsence_small_image = 'neovim'
 
 "-----------------------------------------------------------------------------------
 
-
-
-
 autocmd BufWinEnter,BufNewFile,BufRead,VimEnter,FileType,OptionSet * set formatoptions=jql
 autocmd BufWinEnter,BufNewFile,BufRead,VimEnter,FileType,OptionSet * setlocal formatoptions=jql
 autocmd BufRead,BufNewFile project/*.c setlocal formatoptions-=cro
@@ -255,4 +260,8 @@ autocmd VimLeave,VimLeavePre * :set guicursor+=a:blinkon1
 
 autocmd FileChangedRO * echohl WarningMsg | echo "File changed RO." | echohl None
 autocmd FileChangedShell * echohl WarningMsg | echo "File changed shell." | echohl None
+
+autocmd BufWinEnter,WinEnter term://* startinsert
+" autocmd BufLeave term://* stopinsert
+
 
