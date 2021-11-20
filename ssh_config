@@ -1,0 +1,13 @@
+Host BAY_ROUTER
+    HostName 129.97.181.139
+    User waterloop
+
+Host BAY_RPI
+    HostName 192.168.1.8
+    User pi
+    ProxyJump BAY_ROUTER
+
+Host US_SERVER
+    HostName 34.67.218.57
+    User rmah69420
+

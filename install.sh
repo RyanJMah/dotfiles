@@ -1,5 +1,3 @@
-#! /usr/bin/zsh
-
 THIS_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 echo "starting install..."
@@ -61,6 +59,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "appending 'set startup-with-shell off' to ~/.gdbinit because macos"
     echo "set startup-with-shell off" >> $HOME/.gdbinit;
 fi
+
+echo "\ninstalling .ssh/config"
+
+mkdir $HOME/.ssh
+cp $THIS_DIR/ssh_config $HOME/.ssh
+mv $HOME/.ssh/ssh_config $HOME/.ssh/config
+
 
 echo ""
 
