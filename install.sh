@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 THIS_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 echo "starting install..."
@@ -15,6 +17,13 @@ if [ -d $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
     echo "already installed, skipping..."
 else
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
+
+echo "\ninstalling p10k..."
+if [ -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ]; then
+    echo "already installed, skipping..."
+else
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 fi
 
 echo "\ncopying oh-my-zsh dotfiles..."

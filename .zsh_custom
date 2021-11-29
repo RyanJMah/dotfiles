@@ -42,4 +42,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 stty -ixon
+clear
+#stty stop undef
+#stty start undef
 
