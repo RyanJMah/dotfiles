@@ -1,10 +1,19 @@
-#!/bin/zsh
+#!/bin/bash
 
 THIS_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 echo "starting install..."
 
-echo "\ninstalling oh-my-zsh..."
+echo "installing zsh..."
+if [[ "$OSTYPE" == "darwin*" ]]; then
+    brew install zsh
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    sudo apt-get install zsh
+fi
+
+chsh -s zsh
+
+echo "installing oh-my-zsh..."
 if [ -d $HOME/.oh-my-zsh ]; then
     echo "already installed, skipping..."
 else
@@ -12,27 +21,27 @@ else
     source $HOME/.zshrc
 fi
 
-echo "\ninstalling syntax highlighting plugin..."
+echo "installing syntax highlighting plugin..."
 if [ -d $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
     echo "already installed, skipping..."
 else
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 fi
 
-echo "\ninstalling p10k..."
+echo "installing p10k..."
 if [ -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ]; then
     echo "already installed, skipping..."
 else
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 fi
 
-echo "\ncopying oh-my-zsh dotfiles..."
+echo "copying oh-my-zsh dotfiles..."
 cp $THIS_DIR/.zshrc $HOME
 cp $THIS_DIR/.zsh_custom $HOME
 cp $THIS_DIR/ryan-theme.zsh-theme $HOME/.oh-my-zsh/themes
 source $HOME/.zsh_custom
 
-echo "\ninstalling nvim..."
+echo "installing nvim..."
 if [[ "$OSTYPE" == "darwin"* ]]; then
     brew install neovim
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -41,7 +50,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     sudo mv nvim.appimage /usr/bin
 fi
 
-echo "\ninstalling vim-plug..."
+echo "installing vim-plug..."
 if [ -f $HOME/.vim/autoload/plug.vim ]; then
     echo "already installed, skipping..."
 else
@@ -49,15 +58,15 @@ else
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-echo "\ncopying vim dotfiles..."
+echo "copying vim dotfiles..."
 cp $THIS_DIR/.vimrc $HOME
 mkdir -p $HOME/.config/nvim
 cp $THIS_DIR/init.vim $HOME/.config/nvim
 
-echo "\ninstalling vim plugins..."
+echo "installing vim plugins..."
 vim +PluginInstall +qall
 
-echo "\ninstalling .gdbinit"
+echo "installing .gdbinit"
 cp $THIS_DIR/.gdbinit $HOME
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -65,12 +74,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "set startup-with-shell off" >> $HOME/.gdbinit;
 fi
 
-echo "\ninstalling .ssh/config"
+echo "installing .ssh/config"
 
 mkdir $HOME/.ssh
 cp $THIS_DIR/ssh_config $HOME/.ssh
 mv $HOME/.ssh/ssh_config $HOME/.ssh/config
-
-
-echo ""
 
