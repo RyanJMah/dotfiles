@@ -11,36 +11,6 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     sudo apt-get install zsh
 fi
 
-chsh -s zsh
-
-echo "installing oh-my-zsh..."
-if [ -d $HOME/.oh-my-zsh ]; then
-    echo "already installed, skipping..."
-else
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    source $HOME/.zshrc
-fi
-
-echo "installing syntax highlighting plugin..."
-if [ -d $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
-    echo "already installed, skipping..."
-else
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-fi
-
-echo "installing p10k..."
-if [ -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ]; then
-    echo "already installed, skipping..."
-else
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-fi
-
-echo "copying oh-my-zsh dotfiles..."
-cp $THIS_DIR/.zshrc $HOME
-cp $THIS_DIR/.zsh_custom $HOME
-cp $THIS_DIR/ryan-theme.zsh-theme $HOME/.oh-my-zsh/themes
-source $HOME/.zsh_custom
-
 echo "installing nvim..."
 if [[ "$OSTYPE" == "darwin"* ]]; then
     brew install neovim
@@ -79,4 +49,32 @@ echo "installing .ssh/config"
 mkdir $HOME/.ssh
 cp $THIS_DIR/ssh_config $HOME/.ssh
 mv $HOME/.ssh/ssh_config $HOME/.ssh/config
+
+echo "installing oh-my-zsh..."
+if [ -d $HOME/.oh-my-zsh ]; then
+    echo "already installed, skipping..."
+else
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    source $HOME/.zshrc
+fi
+
+echo "installing syntax highlighting plugin..."
+if [ -d $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
+    echo "already installed, skipping..."
+else
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
+
+echo "installing p10k..."
+if [ -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ]; then
+    echo "already installed, skipping..."
+else
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+fi
+
+echo "copying oh-my-zsh dotfiles..."
+cp $THIS_DIR/.zshrc $HOME
+cp $THIS_DIR/.zsh_custom $HOME
+cp $THIS_DIR/ryan-theme.zsh-theme $HOME/.oh-my-zsh/themes
+source $HOME/.zsh_custom
 

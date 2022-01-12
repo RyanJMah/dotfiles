@@ -8,6 +8,6 @@ Host BAY_RPI
     ProxyJump BAY_ROUTER
 
 Host US_SERVER
-    HostName 34.67.218.57
+    HostName 35.208.75.228
     User rmah69420
 
