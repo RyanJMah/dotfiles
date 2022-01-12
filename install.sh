@@ -28,7 +28,7 @@ mkdir -p $HOME/.config/nvim
 cp $THIS_DIR/init.vim $HOME/.config/nvim
 
 echo "installing vim plugins..."
-nvim.appimage +PluginInstall +qall
+nvim +PluginInstall +qall
 
 echo "installing .gdbinit"
 cp $THIS_DIR/.gdbinit $HOME
