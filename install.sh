@@ -4,13 +4,6 @@ THIS_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 echo "starting install..."
 
-echo "installing zsh..."
-if [[ "$OSTYPE" == "darwin*" ]]; then
-    brew install zsh
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    sudo apt-get install zsh
-fi
-
 echo "installing nvim..."
 if [[ "$OSTYPE" == "darwin"* ]]; then
     brew install neovim
@@ -49,6 +42,14 @@ echo "installing .ssh/config"
 mkdir $HOME/.ssh
 cp $THIS_DIR/ssh_config $HOME/.ssh
 mv $HOME/.ssh/ssh_config $HOME/.ssh/config
+
+
+echo "installing zsh..."
+if [[ "$OSTYPE" == "darwin*" ]]; then
+    brew install zsh
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    sudo apt-get install zsh
+fi
 
 echo "installing oh-my-zsh..."
 if [ -d $HOME/.oh-my-zsh ]; then
