@@ -20,8 +20,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias vi="nvim"
     alias vim="nvim"
     alias clear="clear && printf '\e[3J'"
-    alias gcc="gcc-11"
-    alias g++="g++-11"
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # macos
