@@ -8,10 +8,14 @@ echo "installing nvim..."
 if [[ "$OSTYPE" == "darwin"* ]]; then
     brew install neovim
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    sudo apt-get install neovim
-    # curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-    # chmod u+x nvim.appimage
-    # sudo mv nvim.appimage /usr/bin
+    # we get to build from source here, fun!!!
+    sudo apt install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
+    git clone https://github.com/neovim/neovim.git
+    cd neovim
+    git checkout release-0.6
+    make
+    sudo make install
+    cd ..
 fi
 
 echo "installing vim-plug..."
