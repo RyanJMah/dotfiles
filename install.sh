@@ -16,6 +16,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     make
     sudo make install
     cd ..
+    pip3 install neovim
 fi
 
 echo "installing vim-plug..."

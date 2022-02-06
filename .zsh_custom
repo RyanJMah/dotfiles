@@ -16,7 +16,6 @@ function github_tokens {
 # aliases
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # linux
-    alias nvim="nvim.appimage"
     alias vi="nvim"
     alias vim="nvim"
     alias clear="clear && printf '\e[3J'"
