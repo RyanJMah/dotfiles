@@ -13,8 +13,8 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 
 # theme
-export ZSH_THEME="powerlevel10k/powerlevel10k"
-# export ZSH_THEME="ryan-theme"
+# export ZSH_THEME="powerlevel10k/powerlevel10k"
+export ZSH_THEME="ryan-theme"
 # export ZSH_THEME="robbyrussell-modified"
 # export ZSH_THEME="cloud"
 
