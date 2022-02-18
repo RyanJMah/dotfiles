@@ -1,11 +1,7 @@
-Host BAY_ROUTER
+Host BAY_SERVER
     HostName 129.97.181.139
-    User waterloop
-
-Host BAY_RPI
-    HostName 192.168.1.8
-    User pi
-    ProxyJump BAY_ROUTER
+    User ryan
+    #    ProxyJump BAY_ROUTER
 
 Host US_SERVER
     HostName 35.208.75.228
