@@ -82,6 +82,6 @@ fi
 echo "copying oh-my-zsh dotfiles..."
 cp $THIS_DIR/.zshrc $HOME
 cp $THIS_DIR/.zsh_custom $HOME
-cp $THIS_DIR/ryan-theme.zsh-theme $HOME/.oh-my-zsh/themes
+cp $THIS_DIR/*.zsh-theme $HOME/.oh-my-zsh/themes
 source $HOME/.zsh_custom
 
