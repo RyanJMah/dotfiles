@@ -71,3 +71,10 @@ cp $THIS_DIR/.zsh_custom $HOME
 cp $THIS_DIR/*.zsh-theme $HOME/.oh-my-zsh/themes
 source $HOME/.zsh_custom
 
+echo "installing scripts..."
+if [ -d $HOME/scripts ]; then
+    mkdir $HOME/scripts
+fi
+cp $THIS_DIR/fuck_windows_linux $HOME/scripts
+mv $HOME/scripts/fuck_windows_linux $HOME/scripts/fuck_windows
+

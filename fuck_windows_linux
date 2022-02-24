@@ -1,0 +1,16 @@
+#!bin/bash
+
+ARG=$1
+
+if [ -d $ARG ]
+then
+    find $ARG -type f -print0 | xargs -0 -n 1 -P 4 dos2unix
+
+elif [ -f $ARG ]
+then
+    dos2unix $ARG
+else
+    echo "ERROR: ${ARG} is not a valid file or directory..."
+    exit 1
+fi
+
