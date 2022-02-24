@@ -20,9 +20,6 @@ cp $THIS_DIR/.vimrc $HOME
 mkdir -p $HOME/.config/nvim
 cp $THIS_DIR/init.vim $HOME/.config/nvim
 
-echo "installing vim plugins..."
-nvim +PluginInstall +qall
-
 echo "installing .gdbinit"
 cp $THIS_DIR/.gdbinit $HOME
 echo "appending 'set startup-with-shell off' to ~/.gdbinit because macos"
