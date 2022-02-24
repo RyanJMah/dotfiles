@@ -5,19 +5,7 @@ THIS_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 echo "starting install..."
 
 echo "installing nvim..."
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    brew install neovim
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    # we get to build from source here, fun!!!
-    sudo apt install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
-    git clone https://github.com/neovim/neovim.git
-    cd neovim
-    git checkout release-0.6
-    make
-    sudo make install
-    cd ..
-    pip3 install neovim
-fi
+brew install neovim
 
 echo "installing vim-plug..."
 if [ -f $HOME/.vim/autoload/plug.vim ]; then
@@ -37,25 +25,16 @@ nvim +PluginInstall +qall
 
 echo "installing .gdbinit"
 cp $THIS_DIR/.gdbinit $HOME
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "appending 'set startup-with-shell off' to ~/.gdbinit because macos"
-    echo "set startup-with-shell off" >> $HOME/.gdbinit;
-fi
+echo "appending 'set startup-with-shell off' to ~/.gdbinit because macos"
+echo "set startup-with-shell off" >> $HOME/.gdbinit;
 
 echo "installing .ssh/config"
-
 mkdir $HOME/.ssh
 cp $THIS_DIR/ssh_config $HOME/.ssh
 mv $HOME/.ssh/ssh_config $HOME/.ssh/config
 
-
 echo "installing zsh..."
-if [[ "$OSTYPE" == "darwin*" ]]; then
-    brew install zsh
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    sudo apt-get install zsh
-fi
+brew install zsh
 
 echo "installing oh-my-zsh..."
 if [ -d $HOME/.oh-my-zsh ]; then

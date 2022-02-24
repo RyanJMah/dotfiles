@@ -1,9 +1,13 @@
 Host BAY_SERVER
     HostName 129.97.181.139
     User ryan
-    #    ProxyJump BAY_ROUTER
 
-Host US_SERVER
+Host BAY_RPI
+    HostName 192.168.1.6
+    User pi
+    ProxyJump BAY_SERVER
+
+Host WEB_SERVER
     HostName 35.208.75.228
     User rmah69420
 
