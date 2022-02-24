@@ -68,6 +68,7 @@ echo "installing scripts..."
 if [ -d $HOME/scripts ]; then
     mkdir $HOME/scripts
 fi
+brew install dos2unix
 cp $THIS_DIR/fuck_windows_macos $HOME/scripts
 mv $HOME/scripts/fuck_windows_macos $HOME/scripts/fuck_windows
 

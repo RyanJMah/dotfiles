@@ -72,9 +72,8 @@ cp $THIS_DIR/*.zsh-theme $HOME/.oh-my-zsh/themes
 source $HOME/.zsh_custom
 
 echo "installing scripts..."
-if [ -d $HOME/scripts ]; then
-    mkdir $HOME/scripts
-fi
+mkdir $HOME/scripts
+sudo apt-get install dos2unix
 cp $THIS_DIR/fuck_windows_linux $HOME/scripts
 mv $HOME/scripts/fuck_windows_linux $HOME/scripts/fuck_windows
 
