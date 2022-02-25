@@ -59,13 +59,20 @@ echo "copying oh-my-zsh dotfiles..."
 cp $THIS_DIR/.zshrc $HOME
 cp $THIS_DIR/.zsh_custom $HOME
 cp $THIS_DIR/*.zsh-theme $HOME/.oh-my-zsh/themes
-source $HOME/.zsh_custom
 
 echo "installing scripts..."
-if [ -d $HOME/scripts ]; then
-    mkdir $HOME/scripts
-fi
-brew install dos2unix
-cp $THIS_DIR/fuck_windows_macos $HOME/scripts
-mv $HOME/scripts/fuck_windows_macos $HOME/scripts/fuck_windows
+mkdir $HOME/scripts
 
+# fuck_windows
+brew install dos2unix
+touch $HOME/scripts/fuck_windows
+chmod +x $HOME/scripts/fuck_windows
+echo "#!/bin/zsh" > $HOME/scripts/fuck_windows
+cat $THIS_DIR/fuck_windows >> $HOME/scripts/fuck_windows
+
+# file_share
+pip3 install -r requirements.txt
+touch $HOME/scripts/file_share
+chmod +x $HOME/scripts/file_share
+echo "#!/usr/local/bin/python3" > $HOME/scripts/file_share
+cat $THIS_DIR/file_share >> $HOME/scripts/file_share

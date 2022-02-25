@@ -13,10 +13,11 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 
 # theme
+export ZSH_THEME="ryan-apple"
 # export ZSH_THEME="powerlevel10k/powerlevel10k"
-export ZSH_THEME="ryan-theme"
+# export ZSH_THEME="ryan-theme"
 # export ZSH_THEME="robbyrussell-modified"
-# export ZSH_THEME="cloud"
+# export ZSH_THEME="cloud-modified"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

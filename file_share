@@ -1,0 +1,142 @@
+#!/usr/local/bin/python3
+
+from __future__ import annotations
+import os
+import sys
+import stat
+import click
+import paramiko
+from io import StringIO
+
+IP = "35.208.75.228"
+KEY_PATH = os.path.expanduser(os.path.join("~", ".ssh", "id_rsa"))
+REMOTE_SHARE_DIR = os.path.join("/", "home", "rmah69420", "share")
+
+def _connect_ssh() -> SSHClient:
+    ssh = paramiko.SSHClient() 
+    ssh.load_host_keys(os.path.expanduser(os.path.join("~", ".ssh", "known_hosts")))
+
+    key = None
+    with open(KEY_PATH, "r") as f:
+        key = paramiko.RSAKey.from_private_key(f)
+
+    ssh.connect(IP, username = "rmah69420", pkey = key)
+    return ssh
+
+def _mkdir(path):
+    try:
+        os.mkdir(path)
+    except FileExistsError:
+        pass
+
+class _BetterSftp(paramiko.SFTPClient):
+    def put(self, source, target):
+        click.echo(f"put {source}")
+        super().put(source, target)
+
+    def get(self, source, target):
+        click.echo(f"get {source}")
+        super().get(source, target)
+
+    def put_dir(self, source, target):
+        self.mkdir(target)
+        self._put_dir_recursive(source, target)
+
+    def _put_dir_recursive(self, source, target):
+        for item in os.listdir(source):
+            if os.path.isfile(os.path.join(source, item)):
+                self.put(os.path.join(source, item), os.path.join(target, item))
+            else:
+                self.mkdir(os.path.join(target, item))
+                self._put_dir_recursive(os.path.join(source, item), os.path.join(target, item))
+
+    def get_dir(self, source, target):
+        _mkdir(target)
+        self._get_dir_recursive(source, target)
+
+    def _get_dir_recursive(self, source, target):
+        for item in self.listdir(source):
+            if self._isfile(os.path.join(source, item)):
+                self.get(os.path.join(source, item), os.path.join(target, item))
+            else:
+                _mkdir(os.path.join(target, item))
+                self._get_dir_recursive(os.path.join(source, item), os.path.join(target, item))
+
+    def _isfile(self, remote_path):
+        return not stat.S_ISDIR(self.stat(remote_path).st_mode)
+
+
+    def mkdir(self, path):
+        try:
+            super().mkdir(path)
+        except IOError:
+            pass
+
+
+@click.group()
+def main():
+    pass
+
+@main.command()
+def pending():
+    ssh = _connect_ssh()
+    stdin, stdout, stderr = ssh.exec_command(f"cd {REMOTE_SHARE_DIR} && tree")
+    text = stdout.read()[0:-1].decode()
+    click.echo(text)
+
+@main.command()
+@click.argument("path", type = click.Path(exists = True))
+def put(path):
+    ssh = _connect_ssh()
+    sftp = _BetterSftp.from_transport(ssh.get_transport())
+
+    if os.path.isfile(path):
+        sftp.put(path, os.path.join(REMOTE_SHARE_DIR, path))
+
+    elif os.path.isdir(path):
+        sftp.put_dir(path, os.path.join(REMOTE_SHARE_DIR, path))
+
+    click.echo("done")
+    sftp.close()
+    ssh.close()
+
+@main.command()
+@click.argument("remote_path")
+def get(remote_path):
+    ssh = _connect_ssh()
+    prefix = f"cd {REMOTE_SHARE_DIR} && "
+
+    def send_cmd(cmd):
+        stdin, stdout, stderr = ssh.exec_command(prefix + cmd)
+        return stdout.read()[0:-1].decode()
+
+    def is_dir(path):
+        result = send_cmd(f"if [ -d '{path}' ]; then echo 'yes'; else echo 'no'; fi")
+        return result == "yes"
+
+    if remote_path not in send_cmd("ls").split("\n"):
+        click.echo("Error: remote file not found")
+        sys.exit(1)
+
+    sftp = _BetterSftp.from_transport(ssh.get_transport())
+    if not is_dir(remote_path):
+        sftp.get(
+            os.path.join(REMOTE_SHARE_DIR, remote_path), os.path.join(os.getcwd(), remote_path))
+
+    else:
+        sftp.get_dir(
+            os.path.join(REMOTE_SHARE_DIR, remote_path), os.path.join(os.getcwd(), remote_path))
+
+    click.echo(f"removing {os.path.join(REMOTE_SHARE_DIR, remote_path)} from remote...")
+    send_cmd(f"rm -rf {os.path.join(REMOTE_SHARE_DIR, remote_path)}")
+
+    click.echo("done")
+    sftp.close()
+    ssh.close()
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(1)

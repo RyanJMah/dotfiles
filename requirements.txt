@@ -1,0 +1,8 @@
+paramiko
+click
+pygments
+numpy
+sympy
+pandas
+matplotlib
+scipy
