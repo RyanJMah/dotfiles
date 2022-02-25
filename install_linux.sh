@@ -81,9 +81,9 @@ echo "#\!/bin/bash" > $HOME/scripts/fuck_windows
 cat $THIS_DIR/fuck_windows >> $HOME/scripts/fuck_windows
 
 
-# file_share
+# file-share
 pip3 install -r requirements.txt
-touch $HOME/scripts/file_share
-chmod +x $HOME/scripts/file_share
-echo "#!/usr/bin/python3" > $HOME/scripts/file_share
-cat $THIS_DIR/file_share >> $HOME/scripts/file_share
+touch $HOME/scripts/file-share
+chmod +x $HOME/scripts/file-share
+echo "#!/usr/bin/python3" > $HOME/scripts/file-share
+cat $THIS_DIR/file-share >> $HOME/scripts/file_share
