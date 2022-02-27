@@ -16,6 +16,7 @@ then
     make
     sudo make install
     cd ..
+    sudo apt-get install python3-pip
     pip3 install neovim
 fi
 
