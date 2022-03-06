@@ -1,0 +1,63 @@
+
+"-----------------------------------------------------------------------------------
+" GLOBAL SETTINGS
+syntax on
+set nocompatible
+set cursorline
+set noerrorbells
+set tabstop=4 softtabstop=4
+set expandtab
+set smartindent
+set nu
+set nowrap
+set noswapfile
+set nobackup
+set undodir=~/.vim/undo
+set undofile
+set incsearch
+set hlsearch
+set fileformat=unix
+set nobinary
+set encoding=UTF-8
+set formatoptions=jql
+set mouse=a
+set guicursor+=a:blinkon1
+set ignorecase
+
+" detect os and set shell accordingly
+let _os = system('if [[ $OSTYPE == "linux-gnu"* ]]; then echo "linux"; else echo "macos"; fi')
+if _os == "linux"
+    set shell=/bin/zsh
+elseif _os == "macos"
+    set shell=/usr/bin/zsh
+endif
+
+" Use a blinking upright bar cursor in Insert mode, a blinking block in normal
+if &term == 'xterm-256color' || &term == 'screen-256color'
+    let &t_SI = "\<Esc>[5 q"
+    let &t_EI = "\<Esc>[1 q"
+endif
+
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
+" KEYMAPINGS
+
+" Ctrl+S to save
+noremap  <silent> <C-S> :w<CR>
+vnoremap <silent> <C-S> <C-C>:w<CR>
+inoremap <silent> <C-S> <C-O>:w<CR>
+
+" Unmap some stuff cus they're annoying
+inoremap <C-A> <NOP>
+nnoremap <s> <NOP>
+
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
+" PLUGINS
+call plug#begin("~/.vim/plugged")
+call plug#end()
+"-----------------------------------------------------------------------------------
+
+

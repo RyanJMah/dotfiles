@@ -1,0 +1,5 @@
+{
+    "clangd.path": "/usr/local/Cellar/llvm/13.0.1_1/bin/clangd",
+    "clangd.disableDiagnostics": true
+//    "clangd.disableCompletion": true
+}

@@ -30,8 +30,13 @@ fi
 
 echo "copying vim dotfiles..."
 cp $THIS_DIR/.vimrc $HOME
+cp $THIS_DIR/.terminal-vimrc $HOME
+cp $THIS_DIR/.vscode-vimrc $HOME
 mkdir -p $HOME/.config/nvim
 cp $THIS_DIR/init.vim $HOME/.config/nvim
+cp $THIS_DIR/coc-settings.json $HOME/.config/nvim
+mkdir -p $HOME/.vim/after/syntax
+cp $THIS_DIR/c.vim $HOME/.vim/after/syntax
 
 echo "installing .gdbinit"
 cp $THIS_DIR/.gdbinit $HOME
