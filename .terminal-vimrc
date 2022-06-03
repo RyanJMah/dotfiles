@@ -99,8 +99,8 @@ nnoremap bp :bp<CR>
 nnoremap bd :bd<CR>
 
 " searching
-nnoremap <C-p> :Files<CR>
-command! Search Rg
+nnoremap <C-p> :Telescope find_files<CR>
+command! Search :Telescope live_grep
 
 " Ctrl + B to toggle nerdtree
 nmap <silent> <C-B> :NERDTreeToggle<CR>
@@ -129,7 +129,7 @@ Plug 'RyanJMah/Ryan-VIM-Theme'                " color scheme
 " Plug 'phanviet/vim-monokai-pro'             " color scheme
 " Plug 'morhetz/gruvbox'                      " color scheme
 
-Plug 'jiangmiao/auto-pairs'                 " auto-type bracket pairs
+" Plug 'jiangmiao/auto-pairs'                 " auto-type bracket pairs
 Plug 'luochen1990/rainbow'                  " colorize bracket pairs
 Plug 'preservim/nerdtree'                   " file explorer
 Plug 'ryanoasis/vim-devicons'               " file icons
@@ -138,14 +138,17 @@ Plug 'vim-airline/vim-airline-themes'       " statusline themes
 Plug 'lukas-reineke/indent-blankline.nvim'  " indent guide
 Plug 'airblade/vim-gitgutter'               " git diff
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf.vim'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}     " autocomplete
+Plug 'neoclide/coc.nvim', {'branch': 'release'}                 " autocomplete
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " syntax
+Plug 'p00f/nvim-ts-rainbow'
 
 " language packs
 " Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -188,31 +191,31 @@ colorscheme sonokai
 
 "-----------------------------------------------------------------------------------
 " BRACKET PAIR COLORIZING
-let g:rainbow_active = 1
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-let g:rainbow#max_level = 3
-
-" for monokai pro
-let g:rainbow_conf = {
-\   'guifgs': ['#feb868', '#da71db', '#85c7f2'],
-\   'operators': '__',
-"\   'operators': '_,\|+\|-\|*\|=\|<\|>\|&\||\|<<\|>>\|~_',
-\	'separately': {
-\		'nerdtree': 0,
-\	}
-\} 
+" let g:rainbow_active = 1
+" let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+" let g:rainbow#max_level = 3
+" 
+" " for monokai pro
+" let g:rainbow_conf = {
+" \   'guifgs': ['#feb868', '#da71db', '#85c7f2'],
+" \   'operators': '__',
+" "\   'operators': '_,\|+\|-\|*\|=\|<\|>\|&\||\|<<\|>>\|~_',
+" \	'separately': {
+" \		'nerdtree': 0,
+" \	}
+" \} 
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
 " AUTOCOMPLETE SETTINGS
-set pumheight=10
-set completeopt-=preview
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_max_num_candidates = 2 
-let g:ycm_filetype_specific_completion_to_disable = {
-\   'cpp': 1,
-\   'c': 1
-\}
+" set pumheight=10
+" set completeopt-=preview
+" let g:ycm_show_diagnostics_ui = 0
+" let g:ycm_max_num_candidates = 2 
+" let g:ycm_filetype_specific_completion_to_disable = {
+" \   'cpp': 1,
+" \   'c': 1
+" \}
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
@@ -269,6 +272,71 @@ let g:airline_right_alt_sep = ''
 "   return printf('+%d ~%d -%d', a, m, r)
 " endfunction
 " set statusline+=%{GitStatus()}
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "c", "cpp", "python", "bash", "dockerfile" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+    -- the name of the parser)
+    -- list of language that will be disabled
+    disable = {},
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = true,
+  },
+  rainbow = {
+    enable = true,
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    colors = {
+        "#d79921", 
+        "#689d6a", 
+        "#d65d0e", 
+        "#458588",
+    }
+    -- colors = {
+    --     "#feb868",
+    --     "#da71db",
+    --     "#85c7f2"
+    -- } -- table of hex strings
+    -- termcolors = {} -- table of colour name strings
+  }
+}
+EOF
+hi rainbowcol1 guifg=#feb868
+hi rainbowcol2 guifg=#da71db
+hi rainbowcol3 guifg=#85c7f2
+hi rainbowcol4 guifg=#feb868
+hi rainbowcol5 guifg=#da71db
+hi rainbowcol6 guifg=#85c7f2
+hi rainbowcol7 guifg=#feb868
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
+lua << EOF
+require('telescope').setup{
+    defaults = {
+        previewer = true,
+        preview_cuttoff = 10
+    }
+}
+EOF
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
