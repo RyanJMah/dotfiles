@@ -18,6 +18,11 @@ then
     cd ..
     sudo apt-get install python3-pip
     pip3 install neovim
+    pip3 install jedi
+
+    curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+    sudo bash /tmp/nodesource_setup.sh
+    sudo apt install nodejs
 fi
 
 echo "installing vim-plug..."
