@@ -137,6 +137,7 @@ Plug 'vim-airline/vim-airline'              " statusline
 Plug 'vim-airline/vim-airline-themes'       " statusline themes
 Plug 'lukas-reineke/indent-blankline.nvim'  " indent guide
 Plug 'airblade/vim-gitgutter'               " git diff
+Plug 'tpope/vim-fugitive'                   " git branch for airline
 
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'junegunn/fzf.vim'
@@ -190,39 +191,9 @@ colorscheme sonokai
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
-" BRACKET PAIR COLORIZING
-" let g:rainbow_active = 1
-" let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-" let g:rainbow#max_level = 3
-" 
-" " for monokai pro
-" let g:rainbow_conf = {
-" \   'guifgs': ['#feb868', '#da71db', '#85c7f2'],
-" \   'operators': '__',
-" "\   'operators': '_,\|+\|-\|*\|=\|<\|>\|&\||\|<<\|>>\|~_',
-" \	'separately': {
-" \		'nerdtree': 0,
-" \	}
-" \} 
-"-----------------------------------------------------------------------------------
-
-"-----------------------------------------------------------------------------------
-" AUTOCOMPLETE SETTINGS
-" set pumheight=10
-" set completeopt-=preview
-" let g:ycm_show_diagnostics_ui = 0
-" let g:ycm_max_num_candidates = 2 
-" let g:ycm_filetype_specific_completion_to_disable = {
-" \   'cpp': 1,
-" \   'c': 1
-" \}
-"-----------------------------------------------------------------------------------
-
-"-----------------------------------------------------------------------------------
 " TERMDEBUG SETTINGS
 let g:termdebug_wide=1
 "-----------------------------------------------------------------------------------
-
 
 "-----------------------------------------------------------------------------------
 " NERDTREE SETTINGS
@@ -252,26 +223,44 @@ autocmd BufEnter NERD_tree_* | execute 'normal R' | execute "normal R"
 
 "-----------------------------------------------------------------------------------
 " STATUSLINE
+" let g:airline_powerline_fonts = 1
+
 let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#alt_sep = 0
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
+
+let g:airline#extensions#branch#enabled=1
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
 
 " unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = 'Ɇ'
+let g:airline_symbols.whitespace = 'Ξ'" let g:airline#extensions#tabline#formatter = 'unique_tail'
 
-" airline symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.colnr = ' :'
+let g:airline_symbols.linenr = ' :'
+let g:airline_symbols.maxlinenr = ' '
+let g:airline_symbols.dirty=''
 
-" function! GitStatus()
-"   let [a,m,r] = GitGutterGetHunkSummary()
-"   return printf('+%d ~%d -%d', a, m, r)
-" endfunction
-" set statusline+=%{GitStatus()}
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
+set statusline+=%{GitStatus()}
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
