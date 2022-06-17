@@ -4,7 +4,9 @@ syntax on
 set nocompatible
 set cursorline
 set noerrorbells
-set tabstop=4 softtabstop=4
+set tabstop=4
+set softtabstop=4
+set sw=4
 set expandtab
 set smartindent
 set nu
@@ -256,11 +258,6 @@ let g:airline_symbols.linenr = ' :'
 let g:airline_symbols.maxlinenr = ' '
 let g:airline_symbols.dirty=''
 
-function! GitStatus()
-  let [a,m,r] = GitGutterGetHunkSummary()
-  return printf('+%d ~%d -%d', a, m, r)
-endfunction
-set statusline+=%{GitStatus()}
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
@@ -446,5 +443,4 @@ autocmd FileChangedShell * echohl WarningMsg | echo "File changed shell." | echo
 
 autocmd BufWinEnter,WinEnter term://* startinsert
 " autocmd BufLeave term://* stopinsert
-
 
