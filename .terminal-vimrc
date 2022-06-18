@@ -148,6 +148,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}                 " autocomplete
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " syntax
 Plug 'p00f/nvim-ts-rainbow'
+Plug 'windwp/nvim-autopairs'
 
 " language packs
 " Plug 'octol/vim-cpp-enhanced-highlight'
@@ -261,6 +262,10 @@ let g:airline_symbols.dirty=''
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
+lua << EOF
+require("nvim-autopairs").setup {}
+EOF
+
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
