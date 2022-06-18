@@ -27,7 +27,8 @@ set guicursor+=a:blinkon1
 set nomodeline
 
 packadd termdebug
-let g:termdebugger="arm-none-eabi-gdb"
+" let g:termdebugger="arm-none-eabi-gdb"
+let g:termdebugger="gdb"
 
 " detect os and set shell accordingly
 let _os = system('if [[ $OSTYPE == "linux-gnu"* ]]; then echo "linux"; else echo "macos"; fi')
@@ -141,8 +142,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'  " indent guide
 Plug 'airblade/vim-gitgutter'               " git diff
 Plug 'tpope/vim-fugitive'                   " git branch for airline
 
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}                 " autocomplete
 
@@ -354,6 +354,14 @@ EOF
 let g:vimsence_small_text = 'NeoVim'
 let g:vimsence_small_image = 'neovim'
 
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
+" markdown preview
+ 
+" set default theme (dark or light)
+" By default the theme is define according to the preferences of the system
+let g:mkdp_theme = 'dark'
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
