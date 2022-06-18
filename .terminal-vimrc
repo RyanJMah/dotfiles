@@ -102,7 +102,7 @@ nnoremap bp :bp<CR>
 nnoremap bd :bd<CR>
 
 " searching
-nnoremap <C-p> :Telescope find_files<CR>
+nnoremap <C-p> :Telescope find_files hidden=true<CR>
 command! Search :Telescope live_grep
 
 " Ctrl + B to toggle nerdtree
