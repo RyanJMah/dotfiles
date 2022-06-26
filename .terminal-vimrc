@@ -104,8 +104,9 @@ nnoremap bp :bp<CR>
 nnoremap bd :bd<CR>
 
 " comment out line
-nnoremap <C-/> :Commentary<CR>
-vnoremap <C-/> :Commentary<CR>
+nnoremap <silent> <C-/> :Commentary<CR>
+vnoremap <silent> <C-/> :Commentary<CR>
+inoremap <silent> <C-/> <C-O>:Commentary<CR>
 
 " searching
 nnoremap <C-p> :Telescope find_files hidden=true<CR>
