@@ -103,6 +103,10 @@ nnoremap bn :bn<CR>
 nnoremap bp :bp<CR>
 nnoremap bd :bd<CR>
 
+" comment out line
+nnoremap <C-/> :Commentary<CR>
+vnoremap <C-/> :Commentary<CR>
+
 " searching
 nnoremap <C-p> :Telescope find_files hidden=true<CR>
 command! Search :Telescope live_grep
@@ -143,6 +147,7 @@ Plug 'vim-airline/vim-airline-themes'       " statusline themes
 Plug 'lukas-reineke/indent-blankline.nvim'  " indent guide
 Plug 'airblade/vim-gitgutter'               " git diff
 Plug 'tpope/vim-fugitive'                   " git branch for airline
+Plug 'tpope/vim-commentary'                 " comment out lines
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
 
@@ -333,6 +338,12 @@ hi rainbowcol4 guifg=#feb868
 hi rainbowcol5 guifg=#da71db
 hi rainbowcol6 guifg=#85c7f2
 hi rainbowcol7 guifg=#feb868
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
+" Commentary
+autocmd Filetype c setlocal commentstring=//\ %s
+autocmd Filetype cpp setlocal commentstring=//\ %s
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
