@@ -1,4 +1,4 @@
-"-----------------------------------------------------------------------------------
+" -----------------------------------------------------------------------------------
 " GLOBAL SETTINGS
 syntax on
 set nocompatible
@@ -108,6 +108,9 @@ nnoremap <silent> <C-/> :Commentary<CR>
 vnoremap <silent> <C-/> :Commentary<CR>
 inoremap <silent> <C-/> <C-O>:Commentary<CR>
 
+nnoremap <silent> <C-_> :Commentary<CR>
+vnoremap <silent> <C-_> :Commentary<CR>
+inoremap <silent> <C-_> <C-O>:Commentary<CR>
 " searching
 nnoremap <C-p> :Telescope find_files hidden=true<CR>
 command! Search :Telescope live_grep
@@ -132,7 +135,7 @@ inoremap <C-A> <NOP>
 set nocompatible
 call plug#begin("~/.vim/plugged")
 
-Plug 'RyanJMah/Ryan-VIM-Theme'                " color scheme
+Plug 'RyanJMah/Ryan-VIM-Theme'              " color scheme
 " Plug 'sainnhe/sonokai'                      " color scheme
 " Plug 'ghifarit53/tokyonight-vim'            " color scheme
 " Plug 'joshdick/onedark.vim'                 " color scheme
@@ -172,7 +175,7 @@ call plug#end()
 " COLOR SCHEME
 
 set termguicolors
-let g:sonokai_style = 'shusia'
+let g:sonokai_style = 'default'
 let g:airline_theme = 'sonokai'
 let g:sonokai_disable_italic_comment = 0
 let g:sonokai_enable_italic = 1
