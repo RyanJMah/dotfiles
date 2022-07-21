@@ -17,11 +17,17 @@ function github_tokens {
 alias vi="nvim"
 alias vim="nvim"
 alias clear="clear && printf '\e[3J'"
+alias ntfy="ntfy -b telegram"
+alias notify="ntfy -b telegram"
 
 # variables
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 export PATH=$PATH:"$HOME/scripts"
+
+if [[ "$OSTYPE" != "linux*" ]]; then
+    export PATH=$PATH:"$HOME/.local/bin"
+fi
 
 if [[ "$OSTYPE" == "darwin*" ]]; then
     export PATH=$PATH:"$HOME/programs/xpack-qemu-arm-2.8.0-13/bin"
