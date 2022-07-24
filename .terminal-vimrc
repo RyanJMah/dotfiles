@@ -73,7 +73,62 @@ endfunction
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
+" PLUGINS
+set nocompatible
+call plug#begin("~/.vim/plugged")
+
+Plug 'RyanJMah/Ryan-VIM-Theme'              " color scheme
+" Plug 'sainnhe/sonokai'                      " color scheme
+" Plug 'ghifarit53/tokyonight-vim'            " color scheme
+" Plug 'joshdick/onedark.vim'                 " color scheme
+" Plug 'phanviet/vim-monokai-pro'             " color scheme
+" Plug 'morhetz/gruvbox'                      " color scheme
+
+" Plug 'jiangmiao/auto-pairs'                 " auto-type bracket pairs
+Plug 'luochen1990/rainbow'                  " colorize bracket pairs
+Plug 'preservim/nerdtree'                   " file explorer
+Plug 'ryanoasis/vim-devicons'               " file icons
+Plug 'vim-airline/vim-airline'              " statusline
+Plug 'vim-airline/vim-airline-themes'       " statusline themes
+Plug 'lukas-reineke/indent-blankline.nvim'  " indent guide
+Plug 'airblade/vim-gitgutter'               " git diff
+Plug 'tpope/vim-fugitive'                   " git branch for airline
+Plug 'tpope/vim-commentary'                 " comment out lines
+Plug 'karb94/neoscroll.nvim'                " smooth scrolling
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}                 " autocomplete
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " syntax
+Plug 'p00f/nvim-ts-rainbow'
+Plug 'windwp/nvim-autopairs'
+
+" language packs
+" Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'sheerun/vim-polyglot'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+call plug#end()
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
 " KEYMAPINGS
+
+" SCROLLING
+lua << EOF
+require("neoscroll").setup({
+    mappings = {'<C-u>', '<C-d>'}
+})
+
+local t = {}
+t['<C-u>'] = {"scroll", {"-0.20", "true", "100"}}
+t['<C-d>'] = {"scroll", {"0.20", "true", "100"}}
+
+require("neoscroll.config").set_mappings(t)
+EOF
 
 " Ctrl+S to save
 noremap  <silent> <C-S> :w<CR>
@@ -111,12 +166,10 @@ inoremap <silent> <C-/> <C-O>:Commentary<CR>
 nnoremap <silent> <C-_> :Commentary<CR>
 vnoremap <silent> <C-_> :Commentary<CR>
 inoremap <silent> <C-_> <C-O>:Commentary<CR>
+
 " searching
 nnoremap <C-p> :Telescope find_files hidden=true<CR>
 command! Search :Telescope live_grep
-
-" Ctrl + B to toggle nerdtree
-nmap <silent> <C-B> :NERDTreeToggle<CR>
 
 " Alt+t to toggle terminal
 nnoremap <silent> <A-t> :call TermToggle(12)<CR>
@@ -128,47 +181,6 @@ tnoremap <silent> <Esc> <C-\><C-n>
 " Unmap some stuff cus they're annoying
 inoremap <C-A> <NOP>
 
-"-----------------------------------------------------------------------------------
-
-"-----------------------------------------------------------------------------------
-" PLUGINS
-set nocompatible
-call plug#begin("~/.vim/plugged")
-
-Plug 'RyanJMah/Ryan-VIM-Theme'              " color scheme
-" Plug 'sainnhe/sonokai'                      " color scheme
-" Plug 'ghifarit53/tokyonight-vim'            " color scheme
-" Plug 'joshdick/onedark.vim'                 " color scheme
-" Plug 'phanviet/vim-monokai-pro'             " color scheme
-" Plug 'morhetz/gruvbox'                      " color scheme
-
-" Plug 'jiangmiao/auto-pairs'                 " auto-type bracket pairs
-Plug 'luochen1990/rainbow'                  " colorize bracket pairs
-Plug 'preservim/nerdtree'                   " file explorer
-Plug 'ryanoasis/vim-devicons'               " file icons
-Plug 'vim-airline/vim-airline'              " statusline
-Plug 'vim-airline/vim-airline-themes'       " statusline themes
-Plug 'lukas-reineke/indent-blankline.nvim'  " indent guide
-Plug 'airblade/vim-gitgutter'               " git diff
-Plug 'tpope/vim-fugitive'                   " git branch for airline
-Plug 'tpope/vim-commentary'                 " comment out lines
-
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}                 " autocomplete
-
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " syntax
-Plug 'p00f/nvim-ts-rainbow'
-Plug 'windwp/nvim-autopairs'
-
-" language packs
-" Plug 'octol/vim-cpp-enhanced-highlight'
-" Plug 'sheerun/vim-polyglot'
-
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-
-call plug#end()
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
@@ -211,6 +223,9 @@ let g:termdebug_wide=1
 
 "-----------------------------------------------------------------------------------
 " NERDTREE SETTINGS
+
+" Ctrl + B to toggle nerdtree
+nmap <silent> <C-B> :NERDTreeToggle<CR>
 
 " Display hidden files
 let NERDTreeShowHidden=1
