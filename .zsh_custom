@@ -13,6 +13,10 @@ function github_tokens {
     cat $HOME/shared/Personal/github_tokens.txt
 }
 
+function install_alacritty_terminfo {
+    curl -sSL https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info | tic -x -
+}
+
 # aliases
 alias vi="nvim"
 alias vim="nvim"
@@ -36,5 +40,4 @@ if [[ "$OSTYPE" == "darwin*" ]]; then
 fi
 
 stty -ixon
-clear
 
