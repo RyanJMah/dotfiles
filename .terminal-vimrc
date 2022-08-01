@@ -253,6 +253,17 @@ autocmd BufEnter NERD_tree_* | execute 'normal R' | execute "normal R"
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
+" gitgutter
+
+let g:gitgutter_sign_added = '│'
+let g:gitgutter_sign_modified = '│'
+let g:gitgutter_sign_removed = ''
+let g:gitgutter_sign_removed_first_line = '-'
+let g:gitgutter_sign_removed_above_and_below = '-'
+let g:gitgutter_sign_modified_removed = '~'
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
 " STATUSLINE
 " let g:airline_powerline_fonts = 1
 
@@ -538,7 +549,6 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 
 let g:coc_global_extensions = [
     \ "coc-json",
-    \ "coc-git",
     \ "coc-clangd",
     \ "coc-python",
     \ "coc-sh",
