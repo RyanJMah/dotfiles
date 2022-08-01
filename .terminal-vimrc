@@ -1,5 +1,6 @@
 " -----------------------------------------------------------------------------------
 " GLOBAL SETTINGS
+
 syntax on
 set nocompatible
 set cursorline
@@ -95,6 +96,7 @@ Plug 'airblade/vim-gitgutter'               " git diff
 Plug 'tpope/vim-fugitive'                   " git branch for airline
 Plug 'tpope/vim-commentary'                 " comment out lines
 Plug 'karb94/neoscroll.nvim'                " smooth scrolling
+Plug 'norcalli/nvim-colorizer.lua'          " preview hex colors
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
 
@@ -124,8 +126,8 @@ require("neoscroll").setup({
 })
 
 local t = {}
-t['<C-u>'] = {"scroll", {"-0.20", "true", "100"}}
-t['<C-d>'] = {"scroll", {"0.20", "true", "100"}}
+t['<C-u>'] = {"scroll", {"-0.275", "true", "55"}}
+t['<C-d>'] = {"scroll", {"0.275", "true", "55"}}
 
 require("neoscroll.config").set_mappings(t)
 EOF
@@ -187,7 +189,7 @@ inoremap <C-A> <NOP>
 " COLOR SCHEME
 
 set termguicolors
-let g:sonokai_style = 'shusia'
+let g:sonokai_style = 'default'
 let g:airline_theme = 'sonokai'
 let g:sonokai_disable_italic_comment = 0
 let g:sonokai_enable_italic = 1
@@ -302,8 +304,11 @@ lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = {
+        "vim",
+        "lua",
         "c",
         "cpp",
+        "make",
         "python",
         "bash",
         "dockerfile",
@@ -336,25 +341,18 @@ require'nvim-treesitter.configs'.setup {
     extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
     max_file_lines = nil, -- Do not enable for files with more than n lines, int
     colors = {
-        "#d79921", 
-        "#689d6a", 
-        "#d65d0e", 
-        "#458588",
-    }
-    -- colors = {
-    --     "#feb868",
-    --     "#da71db",
-    --     "#85c7f2"
-    -- } -- table of hex strings
-    -- termcolors = {} -- table of colour name strings
+        "#feb868",
+        "#cd8adc",
+        "#85c7f2"
+    } -- table of hex strings
   }
 }
 EOF
 hi rainbowcol1 guifg=#feb868
-hi rainbowcol2 guifg=#da71db
+hi rainbowcol2 guifg=#cd8adc
 hi rainbowcol3 guifg=#85c7f2
 hi rainbowcol4 guifg=#feb868
-hi rainbowcol5 guifg=#da71db
+hi rainbowcol5 guifg=#cd8adc
 hi rainbowcol6 guifg=#85c7f2
 hi rainbowcol7 guifg=#feb868
 "-----------------------------------------------------------------------------------
@@ -367,12 +365,56 @@ autocmd Filetype cpp setlocal commentstring=//\ %s
 
 "-----------------------------------------------------------------------------------
 lua << EOF
-require('telescope').setup{
+local configuration = vim.fn['sonokai#get_configuration']()
+local p = vim.fn['sonokai#get_palette'](configuration.style, configuration.colors_override)
+local apply_hl = vim.fn["sonokai#highlight"]
+
+apply_hl("TelescopeBorder", p.darker_bg, p.darker_bg)
+apply_hl("TelescopePromptBorder", p.bg1, p.bg1)
+apply_hl("TelescopePromptCounter", p.grey, p.bg1)
+apply_hl("TelescopePromptNormal", p.fg, p.bg1)
+apply_hl("TelescopePromptPrefix", p.bg_red, p.bg1)
+apply_hl("TelescopeNormal", p.none, p.darker_bg)
+apply_hl("TelescopePreviewTitle", p.bg0, p.bg_green)
+apply_hl("TelescopePromptTitle", p.bg0, p.bg_red)
+apply_hl("TelescopeResultsTitle", p.darker_bg, p.darker_bg)
+apply_hl("TelescopeSelection", p.fg, p.bg1)
+apply_hl("TelescopeResultsDiffAdd", p.bg_green, p.none)
+apply_hl("TelescopeResultsDiffChange", p.yellow, p.none)
+apply_hl("TelescopeResultsDiffDelete", p.bg_red, p.none)
+
+local options = {
     defaults = {
-        previewer = true,
-        preview_cuttoff = 10
-    }
+        prompt_prefix = "    ",
+        initial_mode = "insert",
+        selection_strategy = "reset",
+        sorting_strategy = "ascending",
+        layout_strategy = "horizontal",
+        layout_config = {
+            horizontal = {
+                prompt_position = "top",
+                preview_width = 0.55,
+                results_width = 0.8,
+            },
+            vertical = {
+                mirror = false,
+            },
+            width = 0.87,
+            height = 0.80,
+            preview_cutoff = 120,
+        },
+    },
+    extensions_list = { "themes", "terms" },
 }
+
+require("telescope").setup(options)
+EOF
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
+" hex color preview
+lua << EOF
+require("colorizer").setup()
 EOF
 "-----------------------------------------------------------------------------------
 
@@ -380,11 +422,14 @@ EOF
 " indent blankline
 lua <<EOF
 require("indent_blankline").setup {
-    char = "¦",
-    buftype_exclude = {"terminal"}
+    buftype_exclude = {"terminal"},
+    show_trailing_blankline_indent = true,
+    show_first_indent_level = true,
+    show_current_context = true,
+    show_current_context_start = true
 }
-vim.wo.colorcolumn = "99999"
 EOF
+let g:indent_blankline_use_treesitter = v:true
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
@@ -430,21 +475,23 @@ set shortmess+=c
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" use <CR> to trigger completion
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
+                            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
+" Insert <tab> when previous text is space, refresh completion if not.
+inoremap <silent><expr> <TAB>
+    \ coc#pum#visible() ? coc#pum#next(1):
+    \ <SID>check_back_space() ? "\<Tab>" :
+    \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -488,6 +535,16 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+let g:coc_global_extensions = [
+    \ "coc-json",
+    \ "coc-git",
+    \ "coc-clangd",
+    \ "coc-python",
+    \ "coc-sh",
+    \ "coc-cmake"
+\]
+
 "-----------------------------------------------------------------------------------
 
 autocmd BufWinEnter,BufNewFile,BufRead,VimEnter,FileType,OptionSet * set formatoptions=jql
@@ -495,7 +552,6 @@ autocmd BufWinEnter,BufNewFile,BufRead,VimEnter,FileType,OptionSet * setlocal fo
 autocmd BufRead,BufNewFile project/*.c setlocal formatoptions-=cro
 
 autocmd VimLeave,VimLeavePre * :set guicursor=n:ver100-iCursor
-autocmd VimLeave,VimLeavePre * :set guicursor+=a:blinkon1
 
 autocmd FileChangedRO * echohl WarningMsg | echo "File changed RO." | echohl None
 autocmd FileChangedShell * echohl WarningMsg | echo "File changed shell." | echohl None

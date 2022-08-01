@@ -1,5 +1,11 @@
 {
     "diagnostic.checkCurrentLine": true,
-    "clangd.path": "clangd"
-    // "clangd.disableDiagnostics": true
+
+    "clangd.path": "clangd",
+
+    "python.linting.pylintEnabled": false,
+    "python.linting.mypyEnabled": true,
+
+    "suggest.enablePreselect": true,
+    "suggest.noselect": true
 }

@@ -18,11 +18,10 @@ function install_alacritty_terminfo {
 }
 
 # aliases
-alias vi="nvim"
 alias vim="nvim"
 alias clear="clear && printf '\e[3J'"
 alias ntfy="ntfy -b telegram"
-alias notify="ntfy -b telegram"
+alias notify="ntfy"
 
 # variables
 export VIRTUAL_ENV_DISABLE_PROMPT=1
