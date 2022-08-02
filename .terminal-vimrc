@@ -85,33 +85,31 @@ Plug 'RyanJMah/Ryan-VIM-Theme'              " color scheme
 " Plug 'phanviet/vim-monokai-pro'             " color scheme
 " Plug 'morhetz/gruvbox'                      " color scheme
 
-" Plug 'jiangmiao/auto-pairs'                 " auto-type bracket pairs
-Plug 'luochen1990/rainbow'                  " colorize bracket pairs
-Plug 'preservim/nerdtree'                   " file explorer
-Plug 'ryanoasis/vim-devicons'               " file icons
+Plug 'preservim/nerdtree'                           " file explorer
+Plug 'ryanoasis/vim-devicons'                       " file icons
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'      " colors for nerdtree
+
 Plug 'vim-airline/vim-airline'              " statusline
 Plug 'vim-airline/vim-airline-themes'       " statusline themes
-Plug 'lukas-reineke/indent-blankline.nvim'  " indent guide
+
 Plug 'airblade/vim-gitgutter'               " git diff
 Plug 'tpope/vim-fugitive'                   " git branch for airline
+
+Plug 'lukas-reineke/indent-blankline.nvim'  " indent guide
 Plug 'tpope/vim-commentary'                 " comment out lines
 Plug 'karb94/neoscroll.nvim'                " smooth scrolling
 Plug 'norcalli/nvim-colorizer.lua'          " preview hex colors
 
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}                 " autocomplete & linting
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}                 " autocomplete
-
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " syntax
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " syntax highlighting
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'windwp/nvim-autopairs'
 
-" language packs
-" Plug 'octol/vim-cpp-enhanced-highlight'
-" Plug 'sheerun/vim-polyglot'
-
+Plug 'nvim-telescope/telescope.nvim'    " fuzzy file searching
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
 
 call plug#end()
 "-----------------------------------------------------------------------------------
@@ -250,6 +248,10 @@ let NERDTreeQuitOnOpen = 1
 
 " Refresh on focus
 autocmd BufEnter NERD_tree_* | execute 'normal R' | execute "normal R"
+
+" configure colors
+let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
+let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
