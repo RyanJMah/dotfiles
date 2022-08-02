@@ -252,6 +252,42 @@ autocmd BufEnter NERD_tree_* | execute 'normal R' | execute "normal R"
 " configure colors
 let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
 let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+
+let g:NERDTreeLimitedSyntax = 1
+let g:NERDTreeSyntaxEnabledExtensions = [
+    \ "c",
+    \ "h",
+    \ "cpp",
+    \ "hpp",
+    \ "py",
+    \ "sh",
+    \
+    \ "bmp",
+    \ "cs",
+    \ "css",
+    \ "erb",
+    \ "html",
+    \ "java",
+    \ "jpg",
+    \ "js",
+    \ "json",
+    \ "jsx",
+    \ "less",
+    \ "lua",
+    \ "md",
+    \ "png",
+    \ "rb",
+    \ "rs",
+    \ "sql",
+    \ "vim",
+\]
+let g:NERDTreeSyntaxEnabledExactMatches = ["node_modules", "__pycache__"]
+
+let g:NERDTreeExtensionHighlightColor = {}
+let g:NERDTreeExactMatchHighlightColor = {}
+let g:NERDTreeExtensionHighlightColor["mk"] = "aeaaaa"
+let g:NERDTreeExtensionHighlightColor["sh"] = "aa43c1"
+let g:NERDTreeExactMatchHighlightColor["makefile"] = "aeaaaa"
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
