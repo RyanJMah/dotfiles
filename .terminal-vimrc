@@ -95,6 +95,7 @@ Plug 'vim-airline/vim-airline-themes'       " statusline themes
 Plug 'airblade/vim-gitgutter'               " git diff
 Plug 'tpope/vim-fugitive'                   " git branch for airline
 
+Plug 'NMAC427/guess-indent.nvim'            " auto detect indentation
 Plug 'lukas-reineke/indent-blankline.nvim'  " indent guide
 Plug 'tpope/vim-commentary'                 " comment out lines
 Plug 'karb94/neoscroll.nvim'                " smooth scrolling
@@ -463,6 +464,12 @@ EOF
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
+lua << EOF
+require("guess-indent").setup {}
+EOF
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
 " hex color preview
 lua << EOF
 require("colorizer").setup()
@@ -481,6 +488,15 @@ require("indent_blankline").setup {
 }
 EOF
 let g:indent_blankline_use_treesitter = v:true
+let g:indent_blankline_filetype_exclude = [
+    \ "lspinfo",
+    \ "packer",
+    \ "checkhealth",
+    \ "help",
+    \ "man",
+    \ "nerdtree",
+    \ ""
+\]
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
