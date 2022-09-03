@@ -30,6 +30,7 @@ export PATH=$PATH:"$HOME/scripts"
 
 if [[ "$OSTYPE" != "linux*" ]]; then
     export PATH=$PATH:"$HOME/.local/bin"
+    export PATH=$PATH:"/sbin"
 fi
 
 if [[ "$OSTYPE" == "darwin*" ]]; then
