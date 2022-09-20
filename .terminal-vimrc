@@ -414,6 +414,7 @@ hi rainbowcol7 guifg=#feb868
 " Commentary
 autocmd Filetype c setlocal commentstring=//\ %s
 autocmd Filetype cpp setlocal commentstring=//\ %s
+autocmd Filetype verilog setlocal commentstring=//\ %s
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
