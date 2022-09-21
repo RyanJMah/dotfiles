@@ -366,7 +366,7 @@ require'nvim-treesitter.configs'.setup {
         "dockerfile",
         "json",
         "jsonc",
-        "verilog
+        "verilog"
     },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
