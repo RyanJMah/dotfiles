@@ -26,6 +26,7 @@ set mouse=a
 set guicursor+=a:blinkon1
 " set ignorecase
 set nomodeline
+set nospell
 
 packadd termdebug
 " let g:termdebugger="arm-none-eabi-gdb"
@@ -262,6 +263,7 @@ let g:NERDTreeSyntaxEnabledExtensions = [
     \ "hpp",
     \ "py",
     \ "sh",
+    \ "v",
     \
     \ "bmp",
     \ "cs",
@@ -364,7 +366,7 @@ require'nvim-treesitter.configs'.setup {
         "dockerfile",
         "json",
         "jsonc",
-        "verilog"
+        "verilog
     },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -615,7 +617,10 @@ let g:coc_global_extensions = [
 
 autocmd BufWinEnter,BufNewFile,BufRead,VimEnter,FileType,OptionSet * set formatoptions=jql
 autocmd BufWinEnter,BufNewFile,BufRead,VimEnter,FileType,OptionSet * setlocal formatoptions=jql
+
 autocmd BufRead,BufNewFile project/*.c setlocal formatoptions-=cro
+
+autocmd FileType markdown set spell
 
 autocmd VimLeave,VimLeavePre * :set guicursor=n:ver100-iCursor
 
