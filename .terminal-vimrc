@@ -183,6 +183,9 @@ tnoremap <silent> <Esc> <C-\><C-n>
 " Unmap some stuff cus they're annoying
 inoremap <C-A> <NOP>
 
+nnoremap <F2> <NOP>
+inoremap <F2> <NOP>
+vnoremap <F2> <NOP>
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
