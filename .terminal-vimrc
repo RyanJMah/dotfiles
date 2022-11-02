@@ -18,7 +18,7 @@ set undodir=~/.vim/undo
 set undofile
 set incsearch
 set hlsearch
-set fileformat=unix
+set fileformats=unix,dos
 set nobinary
 set encoding=UTF-8
 set formatoptions=jql
