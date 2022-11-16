@@ -43,6 +43,9 @@ cp $THIS_DIR/coc-settings.json $HOME/.config/nvim
 mkdir -p $HOME/.vim/after/syntax
 cp $THIS_DIR/c.vim $HOME/.vim/after/syntax
 
+echo "installing ripgrep..."
+sudo apt install ripgrep
+
 echo "installing .gdbinit"
 cp $THIS_DIR/.gdbinit $HOME
 
