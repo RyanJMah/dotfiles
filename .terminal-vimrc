@@ -126,8 +126,8 @@ require("neoscroll").setup({
 })
 
 local t = {}
-t['<C-u>'] = {"scroll", {"-0.275", "true", "55"}}
-t['<C-d>'] = {"scroll", {"0.275", "true", "55"}}
+t['<C-u>'] = {"scroll", {"-0.275", "false", "55"}}
+t['<C-d>'] = {"scroll", {"0.275", "false", "55"}}
 
 require("neoscroll.config").set_mappings(t)
 EOF
