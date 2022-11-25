@@ -113,6 +113,8 @@ Plug 'nvim-lua/plenary.nvim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
 
+Plug 'vimsence/vimsence'
+
 call plug#end()
 "-----------------------------------------------------------------------------------
 
@@ -427,6 +429,8 @@ autocmd Filetype verilog setlocal commentstring=//\ %s
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
+" More color stuff
+
 lua << EOF
 local configuration = vim.fn['sonokai#get_configuration']()
 local p = vim.fn['sonokai#get_palette'](configuration.style, configuration.colors_override)

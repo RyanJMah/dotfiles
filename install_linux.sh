@@ -19,6 +19,7 @@ then
     sudo apt-get install python3-pip
     pip3 install neovim
     pip3 install jedi
+    python3 -m pip install --user --upgrade pynvim
 
     curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
     sudo bash /tmp/nodesource_setup.sh
