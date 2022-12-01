@@ -107,6 +107,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}                 " autocomplete &
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " syntax highlighting
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'windwp/nvim-autopairs'
+Plug 'nvim-treesitter/playground'
 
 Plug 'nvim-telescope/telescope.nvim'    " fuzzy file searching
 Plug 'nvim-lua/plenary.nvim'
@@ -198,7 +199,8 @@ vnoremap <F1> <NOP>
 " COLOR SCHEME
 
 set termguicolors
-let g:sonokai_style = 'default'
+" let g:sonokai_style = 'default'
+let g:sonokai_style = 'shusia'
 let g:airline_theme = 'sonokai'
 let g:sonokai_disable_italic_comment = 0
 let g:sonokai_enable_italic = 1

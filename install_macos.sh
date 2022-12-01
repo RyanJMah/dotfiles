@@ -5,7 +5,19 @@ THIS_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 echo "starting install..."
 
 echo "installing nvim..."
-brew install neovim
+if ! which nvim
+then
+    brew install ninja libtool automake cmake pkg-config gettext curl
+    git clone https://github.com/neovim/neovim.git
+    cd neovim
+    git checkout tags/v0.8.1
+    make
+    sudo make install
+    cd ..
+    pip3 install neovim
+    pip3 install jedi
+    python3 -m pip install --user --upgrade pynvim
+fi
 
 echo "installing vim-plug..."
 if [ -f $HOME/.vim/autoload/plug.vim ]; then
