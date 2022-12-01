@@ -1,45 +1,3 @@
-
-"-----------------------------------------------------------------------------------
-" GLOBAL SETTINGS
-syntax on
-set nocompatible
-set cursorline
-set noerrorbells
-set tabstop=4 softtabstop=4
-set expandtab
-set smartindent
-set nu
-set nowrap
-set noswapfile
-set nobackup
-set undodir=~/.vim/undo
-set undofile
-set incsearch
-set hlsearch
-set fileformat=unix
-set nobinary
-set encoding=UTF-8
-set formatoptions=jql
-set mouse=a
-set guicursor+=a:blinkon1
-set ignorecase
-
-" detect os and set shell accordingly
-let _os = system('if [[ $OSTYPE == "linux-gnu"* ]]; then echo "linux"; else echo "macos"; fi')
-if _os == "linux"
-    set shell=/bin/zsh
-elseif _os == "macos"
-    set shell=/usr/bin/zsh
-endif
-
-" Use a blinking upright bar cursor in Insert mode, a blinking block in normal
-if &term == 'xterm-256color' || &term == 'screen-256color'
-    let &t_SI = "\<Esc>[5 q"
-    let &t_EI = "\<Esc>[1 q"
-endif
-
-"-----------------------------------------------------------------------------------
-
 "-----------------------------------------------------------------------------------
 " KEYMAPINGS
 
@@ -52,6 +10,28 @@ inoremap <silent> <C-S> <C-O>:w<CR>
 inoremap <C-A> <NOP>
 nnoremap <s> <NOP>
 
+" Ctrl+Z to undo
+nnoremap <C-Z> u
+inoremap <C-Z> <Esc>ui
+
+" Ctrl+Y to redo
+nnoremap <C-Y> <C-R>
+inoremap <C-Y> <Esc><C-R>i
+
+" Alt + Arrows to skip words
+nnoremap <A-Left> b
+nnoremap <C-Left> b
+nnoremap <C-h> b
+vnoremap <C-h> b
+nnoremap <A-Right> e
+nnoremap <C-Right> e
+nnoremap <C-l> e
+vnoremap <C-l> e
+
+" buffer navigation
+nnoremap <silent> bn :bn<CR>
+nnoremap <silent> bp :bp<CR>
+nnoremap <silent> bd :bd<CR>
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
