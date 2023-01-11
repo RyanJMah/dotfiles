@@ -13,7 +13,7 @@ then
     git clone https://github.com/neovim/neovim.git
     cd neovim
     git checkout tags/v0.8.1
-    make
+    make CMAKE_BUILD_TYPE=Release
     sudo make install
     cd ..
     sudo apt-get install python3-pip
