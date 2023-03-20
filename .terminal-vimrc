@@ -29,8 +29,8 @@ set nomodeline
 set nospell
 
 packadd termdebug
-" let g:termdebugger="arm-none-eabi-gdb"
-let g:termdebugger="gdb"
+let g:termdebugger="arm-none-eabi-gdb"
+" let g:termdebugger="gdb"
 
 " detect os and set shell accordingly
 let _os = system('if [[ $OSTYPE == "linux-gnu"* ]]; then echo "linux"; else echo "macos"; fi')
@@ -72,6 +72,80 @@ function! TermToggle(height)
     endif
 endfunction
 
+" close buffer wihtout closing pane
+" Delete buffer while keeping window layout (don't close buffer's windows).
+" Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
+if v:version < 700 || exists('loaded_bclose') || &cp
+  finish
+endif
+let loaded_bclose = 1
+if !exists('bclose_multiple')
+  let bclose_multiple = 1
+endif
+
+" Display an error message.
+function! s:Warn(msg)
+  echohl ErrorMsg
+  echomsg a:msg
+  echohl NONE
+endfunction
+
+" Command ':Bclose' executes ':bd' to delete buffer in current window.
+" The window will show the alternate buffer (Ctrl-^) if it exists,
+" or the previous buffer (:bp), or a blank buffer if no previous.
+" Command ':Bclose!' is the same, but executes ':bd!' (discard changes).
+" An optional argument can specify which buffer to close (name or number).
+function! s:Bclose(bang, buffer)
+    if empty(a:buffer)
+        let btarget = bufnr('%')
+    elseif a:buffer =~ '^\d\+$'
+        let btarget = bufnr(str2nr(a:buffer))
+    else
+        let btarget = bufnr(a:buffer)
+    endif
+    if btarget < 0
+        call s:Warn('No matching buffer for '.a:buffer)
+        return
+    endif
+    if empty(a:bang) && getbufvar(btarget, '&modified')
+        call s:Warn('No write since last change for buffer '.btarget.' (use :Bclose!)')
+        return
+    endif
+    " Numbers of windows that view target buffer which we will delete.
+    let wnums = filter(range(1, winnr('$')), 'winbufnr(v:val) == btarget')
+    if !g:bclose_multiple && len(wnums) > 1
+        call s:Warn('Buffer is in multiple windows (use ":let bclose_multiple=1")')
+        return
+    endif
+    let wcurrent = winnr()
+    for w in wnums
+        execute w.'wincmd w'
+        let prevbuf = bufnr('#')
+        if prevbuf > 0 && buflisted(prevbuf) && prevbuf != btarget
+            buffer #
+        else
+            bprevious
+        endif
+        if btarget == bufnr('%')
+            " Numbers of listed buffers which are not the target to be deleted.
+            let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val != btarget')
+            " Listed, not target, and not displayed.
+            let bhidden = filter(copy(blisted), 'bufwinnr(v:val) < 0')
+            " Take the first buffer, if any (could be more intelligent).
+            let bjump = (bhidden + blisted + [-1])[0]
+            if bjump > 0
+                execute 'buffer '.bjump
+            else
+                execute 'enew'.a:bang
+            endif
+        endif
+    endfor
+    execute 'bdelete'.a:bang.' '.btarget
+    execute wcurrent.'wincmd w'
+endfunction
+command! -bang -complete=buffer -nargs=? Bclose call <SID>Bclose(<q-bang>, <q-args>)
+nnoremap <silent> <Leader>bd :Bclose<CR>
+
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
@@ -95,6 +169,7 @@ Plug 'vim-airline/vim-airline-themes'       " statusline themes
 
 Plug 'airblade/vim-gitgutter'               " git diff
 Plug 'tpope/vim-fugitive'                   " git branch for airline
+Plug 'zivyangll/git-blame.vim'              " blame
 
 Plug 'NMAC427/guess-indent.nvim'            " auto detect indentation
 Plug 'lukas-reineke/indent-blankline.nvim'  " indent guide
@@ -105,7 +180,8 @@ Plug 'norcalli/nvim-colorizer.lua'          " preview hex colors
 Plug 'neoclide/coc.nvim', {'branch': 'release'}                 " autocomplete & linting
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " syntax highlighting
-Plug 'p00f/nvim-ts-rainbow'
+" Plug 'p00f/nvim-ts-rainbow'
+Plug 'mrjones2014/nvim-ts-rainbow'
 Plug 'windwp/nvim-autopairs'
 Plug 'nvim-treesitter/playground'
 
@@ -114,8 +190,12 @@ Plug 'nvim-lua/plenary.nvim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
 
+Plug 'simeji/winresizer'                    " pane resizing
+
 Plug 'andweeb/presence.nvim'
 " Plug 'vimsence/vimsence'
+
+Plug 'vim-scripts/AnsiEsc.vim'      " ansi color codes for log files
 
 call plug#end()
 "-----------------------------------------------------------------------------------
@@ -162,7 +242,11 @@ vnoremap <C-l> e
 " buffer navigation
 nnoremap <silent> bn :bn<CR>
 nnoremap <silent> bp :bp<CR>
-nnoremap <silent> bd :bd<CR>
+nnoremap <silent> bd :Bclose<CR>
+
+" pane resizing
+nnoremap <A-h> :vertical:resize -10<CR>
+nnoremap <A-l> :vertical:resize 10<CR>
 
 " comment out line
 nnoremap <silent> <C-/> :Commentary<CR>
@@ -176,6 +260,15 @@ inoremap <silent> <C-_> <C-O>:Commentary<CR>
 " searching
 nnoremap <C-p> :Telescope find_files hidden=true<CR>
 command! Search :Telescope live_grep
+
+" Open terminal
+command! NewTerm :call termopen($SHELL)
+
+" echo git blame
+command! Blame :call gitblame#echo()
+
+" fix the shitty rainbow plugin by toggling it
+command! FixRainbow :TSToggle rainbow | :TSToggle rainbow
 
 " Alt+t to toggle terminal
 nnoremap <silent> <A-t> :call TermToggle(12)<CR>
@@ -236,10 +329,17 @@ let g:termdebug_wide=1
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
+" WINDOW RESIZING
+let g:winresizer_start_key = "<C-R>"
+let g:winresizer_vert_resize = 4
+let g:winresizer_horiz_resize = 1
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
 " NERDTREE SETTINGS
 
 " Ctrl + B to toggle nerdtree
-nmap <silent> <C-B> :NERDTreeToggle<CR>
+nmap <silent> <C-B> :silent NERDTreeToggle<CR>
 
 " Display hidden files
 let NERDTreeShowHidden=1
@@ -247,10 +347,10 @@ let NERDTreeShowHidden=1
 let g:NERDTreeSortOrder = ['foo','\/$','[[extension]]']
 
 " Start NERDTree when Vim starts with a directory argument.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) &&
-    \ !exists('s:std_in') | execute 'NERDTree' argv()[0] | wincmd p |
-    \ enew | execute 'cd '.argv()[0] | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) &&
+"     \ !exists('s:std_in') | execute 'NERDTree' argv()[0] | wincmd p |
+"     \ enew | execute 'cd '.argv()[0] | endif
 
 let NERDTreeQuitOnOpen = 1
 
@@ -324,7 +424,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#alt_sep = 0
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
-
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#enabled = 0
 
@@ -356,6 +455,8 @@ let g:airline_symbols.colnr = ' :'
 let g:airline_symbols.linenr = ' :'
 let g:airline_symbols.maxlinenr = ' '
 let g:airline_symbols.dirty=''
+
+let g:airline#extensions#tabline#ignore_bufadd_pat = 'defx|gundo|nerd_tree|startify|tagbar|undotree|vimfiler'
 
 "-----------------------------------------------------------------------------------
 
@@ -422,7 +523,9 @@ hi rainbowcol5 guifg=#cd64ce
 hi rainbowcol6 guifg=#85c7f2
 
 hi rainbowcol7 guifg=#feb868
-"-----------------------------------------------------------------------------------
+hi rainbowcol8 guifg=#cd64ce
+hi rainbowcol9 guifg=#85c7f2
+""-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
 " Commentary
@@ -483,7 +586,11 @@ EOF
 "-----------------------------------------------------------------------------------
 " guess indent
 lua << EOF
-require("guess-indent").setup {}
+require("guess-indent").setup {
+    filetype_exclude = {
+        "nerdtree",
+  },
+}
 EOF
 "-----------------------------------------------------------------------------------
 
@@ -510,7 +617,6 @@ let g:indent_blankline_filetype_exclude = [
     \ "checkhealth",
     \ "help",
     \ "man",
-    \ "nerdtree",
     \ ""
 \]
 "-----------------------------------------------------------------------------------
@@ -527,7 +633,7 @@ let g:presence_blacklist = []
 
 "-----------------------------------------------------------------------------------
 " markdown preview
- 
+
 " set default theme (dark or light)
 " By default the theme is define according to the preferences of the system
 let g:mkdp_theme = 'dark'
@@ -584,6 +690,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gb <C-o>
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -634,6 +741,7 @@ let g:coc_global_extensions = [
 
 autocmd BufWinEnter,BufNewFile,BufRead,VimEnter,FileType,OptionSet * set formatoptions=jql
 autocmd BufWinEnter,BufNewFile,BufRead,VimEnter,FileType,OptionSet * setlocal formatoptions=jql
+autocmd BufReadPost,OptionSet * silent :GuessIndent
 
 autocmd BufRead,BufNewFile project/*.c setlocal formatoptions-=cro
 
@@ -645,5 +753,9 @@ autocmd FileChangedRO * echohl WarningMsg | echo "File changed RO." | echohl Non
 autocmd FileChangedShell * echohl WarningMsg | echo "File changed shell." | echohl None
 
 autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd TermOpen * setlocal nonumber norelativenumber
+autocmd TermOpen * if bufwinnr('') > 0 | setlocal nobuflisted | endif
+autocmd TermClose * setlocal number | :Bclose!
 " autocmd BufLeave term://* stopinsert
 
+autocmd BufWritePost * :FixRainbow
