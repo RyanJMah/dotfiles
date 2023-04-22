@@ -1,0 +1,77 @@
+colors:
+  # Default colors
+  cursor:
+    cursor: '0xf6f8fa'
+
+  primary:
+    foreground: '0xf6f8fa'
+    # background: '0x2c2e34'
+    # background: '0x2d2a2e'
+    background: '0x222222'
+ 
+  # Normal colors
+  # normal:
+  #   black:   '0x24292e'
+  #   red:     '0xf97583'
+  #   green:   '0x85e89d'
+  #   yellow:  '0xfed484'
+  #   blue:    '0x79b8ff'
+  #   magenta: '0xac82cb'
+  #   cyan:    '0x87ebec'
+  #   white:   '0xf6f8fa'
+
+  normal:
+    black:   '0x24292e'
+    red:     '0xfc618d'
+    green:   '0x7bd88f'
+    yellow:  '0xfed380'
+    blue:    '0x79b8ff'
+    magenta: '0xac82cb'
+    cyan:    '0x5ad4e6'
+    white:   '0xf7f1ff'
+ 
+  # Bright colors
+  bright:
+    black:   '0x959da5'
+    red:     '0xf97583'
+    green:   '0x85e89d'
+    yellow:  '0xffea7f'
+    blue:    '0x83bcfc'
+    magenta: '0xc294e3'
+    cyan:    '0x8bfafb'
+    white:   '0xf6f8fa'
+
+font:
+  size: 12.75
+  
+  offset:
+    x: 0
+    y: 0
+
+  normal:
+    family: ComicCode Nerd Font
+    style: Medium
+
+  italic:
+    family: ComicCode Nerd Font
+    style: Medium Italic
+
+cursor:
+  style:
+    shape: Beam
+    blinking: Always
+
+window:
+  # decorations: "none"
+  decorations: "buttonless"
+  padding:
+    x: 12
+    y: 8
+    # dynamic_padding: true
+
+alt_send_esc: false
+key_bindings:
+  - {key: T, mods: Alt, chars: "\x1bt"}
+  - {key: Slash, mods: Control, chars: "\x1f"}
+
+

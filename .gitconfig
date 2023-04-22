@@ -1,0 +1,11 @@
+[user]
+	email = rmah@uwaterloo.ca
+	name = Ryan Mah
+[credential]
+	username = RyanJMah
+[core]
+	autocrlf = false
+	ignorecase = false
+	editor = nvim
+[diff]
+	tool = nvimdiff

@@ -37,6 +37,13 @@ cp $THIS_DIR/coc-settings.json $HOME/.config/nvim
 mkdir -p $HOME/.vim/after/syntax
 cp $THIS_DIR/c.vim $HOME/.vim/after/syntax
 
+echo "installing ripgrep"
+brew install ripgrepbp
+
+echo "installing alacritty config..."
+mkdir -p $HOME/.config/alacritty
+cp $THIS_DIR/alacritty.yml $HOME/.config/alacritty
+
 echo "installing .gdbinit"
 cp $THIS_DIR/.gdbinit $HOME
 echo "appending 'set startup-with-shell off' to ~/.gdbinit because macos"
