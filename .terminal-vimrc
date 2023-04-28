@@ -397,10 +397,10 @@ require("bufferline").setup{
             fg = darker_bg,
             bg = darker_bg
         },
-        buffer_selected = {
-            fg = bg_red,
-            bg = bg0
-        }
+        -- buffer_selected = {
+        --     fg = bg_red,
+        --     bg = bg0
+        -- }
     }
 }
 EOF
