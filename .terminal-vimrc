@@ -154,15 +154,11 @@ set nocompatible
 call plug#begin("~/.vim/plugged")
 
 Plug 'RyanJMah/Ryan-VIM-Theme'              " color scheme
-" Plug 'sainnhe/sonokai'                      " color scheme
-" Plug 'ghifarit53/tokyonight-vim'            " color scheme
-" Plug 'joshdick/onedark.vim'                 " color scheme
-" Plug 'phanviet/vim-monokai-pro'             " color scheme
-" Plug 'morhetz/gruvbox'                      " color scheme
 
-Plug 'preservim/nerdtree'                           " file explorer
-Plug 'ryanoasis/vim-devicons'                       " file icons
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'      " colors for nerdtree
+Plug 'nvim-tree/nvim-tree.lua'              " file explorer
+Plug 'nvim-tree/nvim-web-devicons'
+
+Plug 'akinsho/bufferline.nvim'              " Buffer 'tabs'
 
 Plug 'vim-airline/vim-airline'              " statusline
 Plug 'vim-airline/vim-airline-themes'       " statusline themes
@@ -170,6 +166,8 @@ Plug 'vim-airline/vim-airline-themes'       " statusline themes
 Plug 'airblade/vim-gitgutter'               " git diff
 Plug 'tpope/vim-fugitive'                   " git branch for airline
 Plug 'zivyangll/git-blame.vim'              " blame
+
+Plug 'RaafatTurki/hex.nvim'                 " hex editing
 
 Plug 'NMAC427/guess-indent.nvim'            " auto detect indentation
 Plug 'lukas-reineke/indent-blankline.nvim'  " indent guide
@@ -299,28 +297,6 @@ let g:airline_theme = 'sonokai'
 let g:sonokai_disable_italic_comment = 0
 let g:sonokai_enable_italic = 1
 colorscheme sonokai
-
-" set termguicolors
-" colorscheme tokyonight
-" let g:tokyonight_style = 'night'
-" let g:tokyonight_enable_italic = 1
-
-" colorscheme gruvbox
-" set bg=dark
-
-" set termguicolors
-" colorscheme monokai_pro
-" let g:lightline = {
-" \   'colorscheme': 'monokai_pro'
-" \}
-
-" set termguicolors
-" colorscheme onedark
-" let g:onedark_terminal_italics = 1
-" let g:airline_theme = 'onedark'
-" let g:lightline = {
-" \   'colorscheme': 'onedark'
-" \}
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
@@ -336,73 +312,59 @@ let g:winresizer_horiz_resize = 1
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
-" NERDTREE SETTINGS
+" File explorer
 
-" Ctrl + B to toggle nerdtree
-nmap <silent> <C-B> :silent NERDTreeToggle<CR>
+nmap <silent> <C-B> :silent NvimTreeToggle<CR>
 
-" Display hidden files
-let NERDTreeShowHidden=1
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
 
-let g:NERDTreeSortOrder = ['foo','\/$','[[extension]]']
+lua << EOF
+require("nvim-tree").setup({
+    sort_by = "extension",
+    actions = {
+        open_file = {
+            quit_on_open = true
+        }
+    }
+})
 
-" Start NERDTree when Vim starts with a directory argument.
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) &&
-"     \ !exists('s:std_in') | execute 'NERDTree' argv()[0] | wincmd p |
-"     \ enew | execute 'cd '.argv()[0] | endif
+require'nvim-web-devicons'.setup {}
 
-let NERDTreeQuitOnOpen = 1
+local git_icon = ""
+local git_color = "#f1502f"
+local md_icon = ""
+local md_color = "#F09F17"
 
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+require("nvim-web-devicons").set_icon {
+    gitattributes = {
+        icon = git_icon,
+        color = git_color,
+        name = "GitAttributes"
+    },
+    gitignore = {
+        icon = git_icon,
+        color = git_color,
+        name = "GitIgnore"
+    },
+    gitmodules = {
+        icon = git_icon,
+        color = git_color,
+        name = "GitModules"
+    },
 
-" Open the existing NERDTree on each new tab.
-" autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
-
-" Refresh on focus
-autocmd BufEnter NERD_tree_* | execute 'normal R' | execute "normal R"
-
-" configure colors
-let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
-let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
-
-let g:NERDTreeLimitedSyntax = 1
-let g:NERDTreeSyntaxEnabledExtensions = [
-    \ "c",
-    \ "h",
-    \ "cpp",
-    \ "hpp",
-    \ "py",
-    \ "sh",
-    \ "v",
-    \
-    \ "bmp",
-    \ "cs",
-    \ "css",
-    \ "erb",
-    \ "html",
-    \ "java",
-    \ "jpg",
-    \ "js",
-    \ "json",
-    \ "jsx",
-    \ "less",
-    \ "lua",
-    \ "md",
-    \ "png",
-    \ "rb",
-    \ "rs",
-    \ "sql",
-    \ "vim",
-\]
-let g:NERDTreeSyntaxEnabledExactMatches = ["node_modules", "__pycache__"]
-
-let g:NERDTreeExtensionHighlightColor = {}
-let g:NERDTreeExactMatchHighlightColor = {}
-let g:NERDTreeExtensionHighlightColor["mk"] = "aeaaaa"
-let g:NERDTreeExtensionHighlightColor["sh"] = "aa43c1"
-let g:NERDTreeExactMatchHighlightColor["makefile"] = "aeaaaa"
+    markdown = {
+        icon = md_icon,
+        color = md_color,
+        name = "Markdown"
+    },
+    md = {
+        icon = md_icon,
+        color = md_color,
+        name = "Md"
+    }
+}
+EOF
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
@@ -417,10 +379,38 @@ let g:gitgutter_sign_modified_removed = '~'
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
+" Buffer tabs
+lua << EOF
+local configuration = vim.fn['sonokai#get_configuration']()
+local p = vim.fn['sonokai#get_palette'](configuration.style, configuration.colors_override)
+
+-- lua arrays start a 1 for some reaason
+bg_red    = p.bg_red[1]
+darker_bg = p.darker_bg[1]
+
+require("bufferline").setup{
+    options = {
+        separator_style = "thin",
+    },
+    highlights = {
+        fill = {
+            fg = darker_bg,
+            bg = darker_bg
+        },
+        buffer_selected = {
+            fg = bg_red,
+            bg = bg0
+        }
+    }
+}
+EOF
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
 " STATUSLINE
 " let g:airline_powerline_fonts = 1
 
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#alt_sep = 0
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
@@ -458,14 +448,17 @@ let g:airline_symbols.dirty=''
 
 let g:airline#extensions#tabline#ignore_bufadd_pat = 'defx|gundo|nerd_tree|startify|tagbar|undotree|vimfiler'
 
+let g:airline_filetype_overrides = {
+    \ 'NvimTree': [ "NvimTree", '' ]
+\ }
+
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
+" Treesitter
 lua << EOF
 require("nvim-autopairs").setup {}
-EOF
 
-lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
     ensure_installed = {
@@ -474,12 +467,15 @@ require'nvim-treesitter.configs'.setup {
         "c",
         "cpp",
         "make",
+        "cmake",
+        "devicetree",
         "python",
-        "bash",
         "dockerfile",
         "json",
         "jsonc",
-        "verilog"
+        "verilog",
+        "gitcommit",
+        "gitignore"
     },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -598,6 +594,13 @@ EOF
 " hex color preview
 lua << EOF
 require("colorizer").setup()
+EOF
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
+" hex editor
+lua << EOF
+require 'hex'.setup()
 EOF
 "-----------------------------------------------------------------------------------
 
