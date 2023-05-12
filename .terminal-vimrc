@@ -405,7 +405,16 @@ require("nvim-tree").setup({
             quit_on_open = true
         }
     },
-    on_attach = on_attach
+    on_attach = on_attach,
+    git = {
+        ignore = false,
+    },
+    filters = {
+        custom = {".DS_Store"}
+    },
+    view = {
+        preserve_window_proportions = true
+    }
 })
 
 require'nvim-web-devicons'.setup {}
@@ -441,6 +450,12 @@ require("nvim-web-devicons").set_icon {
         icon = md_icon,
         color = md_color,
         name = "Md"
+    },
+
+    txt = {
+        icon = "",
+        color = "#519aba",
+        name = "Txt"
     }
 }
 EOF
