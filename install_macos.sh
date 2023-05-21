@@ -100,3 +100,7 @@ touch $HOME/scripts/file-share
 chmod +x $HOME/scripts/file-share
 echo "#!/usr/local/bin/python3" > $HOME/scripts/file-share
 cat $THIS_DIR/file-share >> $HOME/scripts/file-share
+
+echo "installing yabai and skhd dotfiles..."
+cp $THIS_DIR/macos/.yabairc $HOME
+cp $THIS_DIR/macos/.skhdrc $HOME
