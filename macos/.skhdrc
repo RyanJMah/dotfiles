@@ -82,6 +82,11 @@ shift + cmd - r : yabai --restart-service
 # open alacritty
 cmd - return : /opt/homebrew/bin/alacritty msg create-window || open /Applications/Alacritty.app
 
+# rebind cmd + q for alacritty
+cmd - q [
+    "alacritty" : skhd --key "cmd - w"
+]
+
 # focus window
 cmd - h : yabai -m window --focus west || yabai -m display --focus west
 cmd - j : yabai -m window --focus south || yabai -m display --focus south
@@ -95,10 +100,10 @@ cmd - up    : yabai -m window --focus north || yabai -m display --focus north
 cmd - right : yabai -m window --focus east || yabai -m display --focus east
 
 # move window
-shift + cmd - left  : yabai -m window --swap west || yabai -m window --display west
-shift + cmd - down  : yabai -m window --swap south || yabai -m window --display south
-shift + cmd - up    : yabai -m window --swap north || yabai -m window --display north
-shift + cmd - right : yabai -m window --swap east || yabai -m window --display east
+shift + cmd - left  : yabai -m window --swap west || (yabai -m window --display west && yabai -m display --focus west)
+shift + cmd - down  : yabai -m window --swap south || (yabai -m window --display south && yabai -m display --focus south)
+shift + cmd - up    : yabai -m window --swap north || (yabai -m window --display north && yabai -m display --focus north)
+shift + cmd - right : yabai -m window --swap east || (yabai -m window --display east && yabai -m display --focus east)
 
 # resize window
 alt + cmd - left  : yabai -m window --resize left:-20:0 || yabai -m window --resize right:-20:0 
