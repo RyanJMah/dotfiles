@@ -10,7 +10,7 @@ then
     brew install ninja libtool automake cmake pkg-config gettext curl
     git clone https://github.com/neovim/neovim.git
     cd neovim
-    git checkout tags/v0.8.1
+    git checkout tags/v0.9.0
     make CMAKE_BUILD_TYPE=Release
     sudo make install
     cd ..
