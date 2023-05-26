@@ -106,3 +106,14 @@ touch $HOME/scripts/file-share
 chmod +x $HOME/scripts/file-share
 echo "#!/usr/bin/python3" > $HOME/scripts/file-share
 cat $THIS_DIR/file-share >> $HOME/scripts/file-share
+
+echo "installing WM dotfiles"
+mkdir -p $HOME/.config/i3/config
+cp $THIS_DIR/linux/i3-config $HOME/.config/i3/config
+
+echo "installing polybar conf"
+if [ -d $HOME/.config/polybar ]; then
+    echo "already installed, skipping..."
+else
+    cp -r $THIS_DIR/linux/polybar $HOME/.config/polybar
+fi

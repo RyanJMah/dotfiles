@@ -1,0 +1,174 @@
+# gaps
+gaps inner 15
+gaps outer 4
+for_window [class="^.*"] border pixel 0
+
+# rounded corners
+# set $thick 16
+# border_radius 10
+
+# set modifier
+set $super Mod4
+set $alt Mod1
+
+# set font
+font pango: Open Sans 10
+
+# Use Mouse+$super to drag floating windows to their wanted position
+floating_modifier $super
+focus_follows_mouse no
+
+#autostart
+exec --no-startup-id feh --bg-fill /home/ryan/Pictures/wallpaper.jpg
+# exec --no-startup-id nm-applet
+# exec --no-startup-id blueman-applet
+# exec --no-startup-id sudo fusuma &
+exec --no-startup-id /home/ryan/.config/polybar/forest/launch.sh
+exec --no-startup-id picom --experimental-backends --focus-exclude "class_g = 'rofi'" -b
+
+# exit i3
+bindsym $super+Shift+q exec "i3-nagbar -t warning -m 'Are you sure you want to logout?' -b 'Yes' 'i3-msg exit'"
+
+# start a terminal
+bindsym $super+t exec alacritty
+bindsym $super+Return exec alacritty
+
+# start rofi (a program launcher)
+# bindsym $super+space exec rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Open Sans 10'
+bindsym $super+space exec rofi -no-config -no-lazy-grab -show drun -modi drun -theme $HOME/.local/share/rofi/themes/spotlight-dark.rasi
+
+# change volume
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-
+bindsym $super+End exec amixer -D pulse sset Master 5%+
+bindsym $super+Home exec amixer -D pulse sset Master 5%-
+
+# change brightness
+bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec light -U 5
+
+# screenshot
+bindsym $alt+Shift+4 exec flameshot gui
+
+# kill focused window
+bindsym $super+q kill
+bindsym $super+w kill
+bindsym $alt+F4 kill
+
+# change focus
+bindsym $super+Left focus left
+bindsym $super+Down focus down
+bindsym $super+Up focus up
+bindsym $super+Right focus right
+
+bindsym $super+h focus left
+bindsym $super+j focus down
+bindsym $super+k focus up
+bindsym $super+l focus right
+
+# move focused window
+bindsym $super+Shift+Left move left
+bindsym $super+Shift+Down move down
+bindsym $super+Shift+Up move up
+bindsym $super+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $super+Shift+h split h
+
+# split in vertical orientation
+bindsym $super+Shift+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $super+f fullscreen toggle
+
+# change container layout split
+bindsym $super+s layout toggle split
+
+# toggle tiling / floating
+bindsym $super+Shift+w floating toggle
+
+# change focus between tiling / floating windows
+bindsym $super+Shift+space focus mode_toggle
+
+# switch to workspace
+# bindsym $super+Shift+Right workspace next
+# bindsym $super+Shift+Left workspace prev
+bindsym $super+1 workspace 1
+bindsym $super+2 workspace 2
+bindsym $super+3 workspace 3
+bindsym $super+4 workspace 4
+bindsym $super+5 workspace 5
+bindsym $super+6 workspace 6
+bindsym $super+7 workspace 7
+bindsym $super+8 workspace 8
+bindsym $super+9 workspace 9
+
+# move focused container to workspace
+bindsym $super+Shift+1 move container to workspace 1
+bindsym $super+Shift+2 move container to workspace 2
+bindsym $super+Shift+3 move container to workspace 3
+bindsym $super+Shift+4 move container to workspace 4
+bindsym $super+Shift+5 move container to workspace 5
+bindsym $super+Shift+6 move container to workspace 6
+bindsym $super+Shift+7 move container to workspace 7
+bindsym $super+Shift+8 move container to workspace 8
+bindsym $super+Shift+9 move container to workspace 9
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $super+Shift+r restart
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym Left resize shrink width 10 px
+        bindsym Down resize grow height 10 px
+        bindsym Up resize shrink height 10 px
+        bindsym Right resize grow width 10 px
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $super+r mode "resize"
+
+# panel
+# bar {
+#         colors {
+#         background #2f343f
+#         statusline #2f343f
+#         separator #4b5262
+# 
+#         # colour of border, background, and text
+#         focused_workspace       #2f343f #bf616a #d8dee8
+#         active_workspace        #2f343f #2f343f #d8dee8
+#         inactive_workspace      #2f343f #2f343f #d8dee8
+#         urgent_workspacei       #2f343f #ebcb8b #2f343f
+#     }
+#         status_command i3status
+# }
+
+
+
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
+
+# bar {
+#   position top
+#   tray_output primary
+#   colors {
+#     background #282A36
+#     statusline #F8F8F2
+#     separator  #44475A
+# 
+#     focused_workspace  #2f343f #61262c #bbbcbd
+#     active_workspace   #282A36 #44475A #F8F8F2
+#     inactive_workspace #282A36 #282A36 #BFBFBF
+#     urgent_workspace   #FF5555 #FF5555 #F8F8F2
+#     binding_mode       #FF5555 #FF5555 #F8F8F2
+#   }
+#   status_command i3status
+# }
+
