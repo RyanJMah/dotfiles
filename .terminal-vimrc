@@ -482,15 +482,23 @@ local p = vim.fn['sonokai#get_palette'](configuration.style, configuration.color
 bg_red    = p.bg_red[1]
 darker_bg = p.darker_bg[1]
 
-require("bufferline").setup{
+local bufferline = require("bufferline")
+
+bufferline.setup{
     options = {
         separator_style = "thin",
+        enfore_regular_tabs = false,
+        truncate_names = false,
+        tab_size = 15
     },
     highlights = {
         fill = {
             fg = darker_bg,
             bg = darker_bg
         },
+        buffer_selected = {
+            italic = false
+        }
         -- buffer_selected = {
         --     fg = bg_red,
         --     bg = bg0
