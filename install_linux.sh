@@ -44,6 +44,10 @@ cp $THIS_DIR/coc-settings.json $HOME/.config/nvim
 mkdir -p $HOME/.vim/after/syntax
 cp $THIS_DIR/c.vim $HOME/.vim/after/syntax
 
+echo "installing clangd..."
+sudo apt install clangd-12
+sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-12 100
+
 echo "installing ripgrep..."
 sudo apt install ripgrep
 

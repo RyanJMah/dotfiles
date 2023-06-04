@@ -24,7 +24,6 @@ set encoding=UTF-8
 set formatoptions=jql
 set mouse=a
 set guicursor+=a:blinkon1
-" set ignorecase
 set nomodeline
 set nospell
 
@@ -126,7 +125,7 @@ function! s:Bclose(bang, buffer)
         if prevbuf > 0 && buflisted(prevbuf) && prevbuf != btarget
             buffer #
         else
-            bprevious
+            BufferLineCycleNext
         endif
         if btarget == bufnr('%')
             " Numbers of listed buffers which are not the target to be deleted.
@@ -240,9 +239,14 @@ nnoremap <C-l> e
 vnoremap <C-l> e
 
 " buffer navigation
-nnoremap <silent> bn :bn<CR>
-nnoremap <silent> bp :bp<CR>
+nnoremap <silent> bn :BufferLineCycleNext<CR>
+nnoremap <silent> bp :BufferLineCyclePrev<CR>
 nnoremap <silent> bd :Bclose<CR>
+
+
+" nnoremap <silent> bn :bn<CR>
+" nnoremap <silent> bp :bp<CR>
+" nnoremap <silent> bd :Bclose<CR>
 
 " comment out line
 nnoremap <silent> <C-/> :Commentary<CR>
@@ -289,8 +293,8 @@ vnoremap <F1> <NOP>
 " COLOR SCHEME
 
 set termguicolors
-" let g:sonokai_style = 'dark'
-let g:sonokai_style = 'darker'
+let g:sonokai_style = 'dark'
+" let g:sonokai_style = 'darker'
 let g:airline_theme = 'sonokai'
 let g:sonokai_disable_italic_comment = 0
 let g:sonokai_enable_italic = 1
@@ -414,6 +418,9 @@ require("nvim-tree").setup({
     },
     view = {
         preserve_window_proportions = true
+    },
+    diagnostics = {
+        enable = false
     }
 })
 
@@ -481,6 +488,7 @@ local p = vim.fn['sonokai#get_palette'](configuration.style, configuration.color
 -- lua arrays start a 1 for some reaason
 bg_red    = p.bg_red[1]
 darker_bg = p.darker_bg[1]
+bg_green  = p.bg_green[1]
 
 require("bufferline").setup{
     options = {
@@ -488,14 +496,10 @@ require("bufferline").setup{
     },
     highlights = {
         fill = {
-            fg = darker_bg,
+            fg = bg_green,
             bg = darker_bg
-        },
-        -- buffer_selected = {
-        --     fg = bg_red,
-        --     bg = bg0
-        -- }
-    }
+        }
+    },
 }
 EOF
 "-----------------------------------------------------------------------------------
@@ -566,6 +570,7 @@ require'nvim-treesitter.configs'.setup {
         "cmake",
         "devicetree",
         "python",
+        "matlab",
         "dockerfile",
         "json",
         "jsonc",
