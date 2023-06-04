@@ -1,7 +1,9 @@
 {
     "diagnostic.checkCurrentLine": true,
+    "inlayHint.enable": false,
 
     "clangd.path": "clangd",
+    "clangd.disableDiagnostics": true,
 
     "python.linting.pylintEnabled": false,
     "python.linting.mypyEnabled": true,
