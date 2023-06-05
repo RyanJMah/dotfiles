@@ -5,9 +5,8 @@ colors:
 
   primary:
     foreground: '0xf6f8fa'
-    # background: '0x2c2e34'
-    # background: '0x2d2a2e'
-    background: '0x222222'
+    background: '0x282629'
+    # background: '0x222222'
  
   # Normal colors
   # normal:
@@ -42,7 +41,11 @@ colors:
     white:   '0xf6f8fa'
 
 font:
-  size: 12.75
+  # size for laptop
+  # size: 12.75
+
+  # size for monitor
+  size: 13.5
   
   offset:
     x: 0
@@ -62,16 +65,13 @@ cursor:
     blinking: Always
 
 window:
-  # decorations: "none"
   decorations: "buttonless"
   padding:
-    x: 12
-    y: 8
-    # dynamic_padding: true
+    x: 8
+    y: 6
 
-alt_send_esc: false
+window.option_as_alt: true
 key_bindings:
-  - {key: T, mods: Alt, chars: "\x1bt"}
   - {key: Slash, mods: Control, chars: "\x1f"}
 
 
