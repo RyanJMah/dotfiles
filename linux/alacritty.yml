@@ -5,9 +5,8 @@ colors:
 
   primary:
     foreground: '0xf6f8fa'
-    # background: '0x2c2e34'
-    # background: '0x2d2a2e'
-    background: '0x222222'
+    background: '0x282629'
+    # background: '0x222222'
  
   # Normal colors
   # normal:
@@ -42,7 +41,7 @@ colors:
     white:   '0xf6f8fa'
 
 font:
-  size: 11.25
+  size: 11.5
   
   offset:
     x: 0
@@ -64,9 +63,9 @@ cursor:
 window:
   # decorations: "none"
   padding:
-    x: 12
-    y: 8
-    # dynamic_padding: true
+    x: 14
+    y: 10
+    dynamic_padding: true
 
 alt_send_esc: false
 key_bindings:
