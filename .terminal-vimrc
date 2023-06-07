@@ -515,6 +515,7 @@ bufferline.setup{
     }
 }
 EOF
+
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
@@ -638,6 +639,30 @@ hi rainbowcol9 guifg=#85c7f2
 ""-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
+" indent blankline
+lua <<EOF
+require("indent_blankline").setup {
+    buftype_exclude = {"terminal"},
+    show_first_indent_level = true,
+    show_current_context = true,
+    show_current_context_start = true,
+    use_treesitter = true,
+    char = '│',
+    context_char = '▎',
+}
+EOF
+let g:indent_blankline_filetype_exclude = [
+    \ "lspinfo",
+    \ "packer",
+    \ "checkhealth",
+    \ "help",
+    \ "man",
+    \ ""
+\]
+"-----------------------------------------------------------------------------------
+
+
+"-----------------------------------------------------------------------------------
 " Commentary
 autocmd Filetype c setlocal commentstring=//\ %s
 autocmd Filetype cpp setlocal commentstring=//\ %s
@@ -716,26 +741,6 @@ EOF
 lua << EOF
 require 'hex'.setup()
 EOF
-"-----------------------------------------------------------------------------------
-
-"-----------------------------------------------------------------------------------
-" indent blankline
-lua <<EOF
-require("indent_blankline").setup {
-    buftype_exclude = {"terminal"},
-    show_first_indent_level = true,
-    show_current_context = true,
-    show_current_context_start = true
-}
-EOF
-let g:indent_blankline_filetype_exclude = [
-    \ "lspinfo",
-    \ "packer",
-    \ "checkhealth",
-    \ "help",
-    \ "man",
-    \ ""
-\]
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
