@@ -8,15 +8,8 @@ echo "installing nvim..."
 if ! which nvim
 then
     brew install ninja libtool automake cmake pkg-config gettext curl
-    git clone https://github.com/neovim/neovim.git
-    cd neovim
-    git checkout tags/v0.9.0
-    make CMAKE_BUILD_TYPE=Release
-    sudo make install
-    cd ..
-    pip3 install neovim
-    pip3 install jedi
-    python3 -m pip install --user --upgrade pynvim
+
+    ./build_nvim.sh
 fi
 
 echo "installing vim-plug..."
