@@ -495,9 +495,9 @@ local bufferline = require("bufferline")
 bufferline.setup{
     options = {
         separator_style = "thin",
-        enfore_regular_tabs = false,
+        -- enfore_regular_tabs = false,
         truncate_names = false,
-        tab_size = 15
+        -- tab_size = 15
     },
     highlights = {
         fill = {
@@ -645,8 +645,8 @@ require("indent_blankline").setup {
     buftype_exclude = {"terminal"},
     show_first_indent_level = true,
     show_current_context = true,
-    show_current_context_start = true,
-    use_treesitter = true,
+    show_current_context_start = false,
+    -- use_treesitter = true,
     char = '│',
     context_char = '▎',
 }
