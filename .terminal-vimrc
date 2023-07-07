@@ -170,7 +170,7 @@ Plug 'zivyangll/git-blame.vim'              " blame
 
 Plug 'RaafatTurki/hex.nvim'                 " hex editing
 
-Plug 'NMAC427/guess-indent.nvim'            " auto detect indentation
+" Plug 'NMAC427/guess-indent.nvim'            " auto detect indentation
 Plug 'lukas-reineke/indent-blankline.nvim'  " indent guide
 Plug 'tpope/vim-commentary'                 " comment out lines
 Plug 'karb94/neoscroll.nvim'                " smooth scrolling
@@ -466,6 +466,8 @@ require("nvim-web-devicons").set_icon {
     }
 }
 EOF
+
+autocmd Filetype NvimTree setlocal sw=2
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
@@ -642,7 +644,7 @@ hi rainbowcol9 guifg=#85c7f2
 " indent blankline
 lua <<EOF
 require("indent_blankline").setup {
-    buftype_exclude = {"terminal"},
+    buftype_exclude = {"terminal", "NvimTree"},
     show_first_indent_level = true,
     show_current_context = true,
     show_current_context_start = false,
@@ -720,13 +722,13 @@ EOF
 
 "-----------------------------------------------------------------------------------
 " guess indent
-lua << EOF
-require("guess-indent").setup {
-    filetype_exclude = {
-        "nerdtree",
-  },
-}
-EOF
+"lua << EOF
+"require("guess-indent").setup {
+"    filetype_exclude = {
+"        "nerdtree",
+"  },
+"}
+"EOF
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
@@ -863,7 +865,7 @@ let g:coc_global_extensions = [
 
 autocmd BufWinEnter,BufNewFile,BufRead,VimEnter,FileType,OptionSet * set formatoptions=jql
 autocmd BufWinEnter,BufNewFile,BufRead,VimEnter,FileType,OptionSet * setlocal formatoptions=jql
-autocmd BufReadPost,OptionSet * silent :GuessIndent
+" autocmd BufReadPost,OptionSet * silent :GuessIndent
 
 autocmd BufRead,BufNewFile project/*.c setlocal formatoptions-=cro
 
