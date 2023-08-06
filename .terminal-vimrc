@@ -196,6 +196,8 @@ Plug 'andweeb/presence.nvim'
 
 Plug 'vim-scripts/AnsiEsc.vim'      " ansi color codes for log files
 
+Plug 'github/copilot.vim', {'branch': 'release'}
+
 call plug#end()
 "-----------------------------------------------------------------------------------
 
@@ -568,6 +570,12 @@ let g:airline_filetype_overrides = {
     \ 'NvimTree': [ "NvimTree", '' ]
 \ }
 
+"-----------------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------------
+" Github Copilot
+" imap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
+" let g:copilot_no_tab_map = v:true
 "-----------------------------------------------------------------------------------
 
 "-----------------------------------------------------------------------------------
