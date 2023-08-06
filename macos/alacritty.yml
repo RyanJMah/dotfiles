@@ -70,7 +70,8 @@ window:
     x: 10
     y: 7
 
-window.option_as_alt: true
+  option_as_alt: "Both"
+
 key_bindings:
   - {key: Slash, mods: Control, chars: "\x1f"}
 
