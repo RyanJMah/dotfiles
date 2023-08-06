@@ -36,6 +36,22 @@ cp $THIS_DIR/coc-settings.json $HOME/.config/nvim
 mkdir -p $HOME/.vim/after/syntax
 cp $THIS_DIR/c.vim $HOME/.vim/after/syntax
 
+echo "installing tmux..."
+if ! which tmux
+then
+    sudo apt install tmux
+fi
+
+echo "installing tmux plugin manager..."
+if [ -d $HOME/.tmux/plugins/tpm ]; then
+    echo "already installed, skipping..."
+else
+    git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+fi
+
+echo "copying tmux dotfiles..."
+cp $THIS_DIR/.tmux.conf $HOME
+
 echo "installing clangd..."
 sudo apt install clangd-12
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-12 100

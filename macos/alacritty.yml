@@ -74,4 +74,5 @@ window.option_as_alt: true
 key_bindings:
   - {key: Slash, mods: Control, chars: "\x1f"}
 
-
+env:
+  TERM: xterm-256color
