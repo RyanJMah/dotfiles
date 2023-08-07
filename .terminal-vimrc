@@ -490,6 +490,9 @@ local configuration = vim.fn['sonokai#get_configuration']()
 local p = vim.fn['sonokai#get_palette'](configuration.style, configuration.colors_override)
 
 -- lua arrays start a 1 for some reaason
+fg        = p.fg[1]
+bg0       = p.bg0[1]
+bg3       = p.bg3[1]
 bg_red    = p.bg_red[1]
 darker_bg = p.darker_bg[1]
 bg_green  = p.bg_green[1]
@@ -505,12 +508,14 @@ bufferline.setup{
     },
     highlights = {
         fill = {
-            fg = bg_green,
+            fg = fg,
             bg = darker_bg
         },
         buffer_selected = {
             italic = false,
-            bold = false
+            bold = false,
+            bg = bg0,
+            fg = fg
         }
         -- buffer_selected = {
         --     fg = bg_red,
