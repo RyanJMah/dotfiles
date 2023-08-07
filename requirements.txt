@@ -8,3 +8,4 @@ matplotlib
 scipy
 ntfy
 ntfy[telegram]
+libtmux
