@@ -10,7 +10,7 @@ function rc {
 
 # shortcut to print github tokens
 function github_tokens {
-    cat $HOME/shared/Personal/github_tokens.txt
+    cat $HOME/main/personal/github_tokens.txt
 }
 
 function install_alacritty_terminfo {
@@ -28,16 +28,24 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 export PATH=$PATH:"$HOME/scripts"
 
-if [[ "$OSTYPE" != "linux*" ]]; then
+if [[ $OSTYPE == "linux"* ]]; then
     export PATH=$PATH:"$HOME/.local/bin"
     export PATH=$PATH:"/sbin"
 fi
 
-if [[ "$OSTYPE" == "darwin*" ]]; then
+if [[ $OSTYPE == "darwin"* ]]; then
     export PATH=$PATH:"$HOME/programs/xpack-qemu-arm-2.8.0-13/bin"
     export PATH=$PATH:"$HOME/.local/xPacks/@xpack-dev-tools/openocd/0.11.0-2.1/.content/bin"
     export PATH=$PATH:"/Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin"
+    export PATH=$PATH:"/usr/local/texlive/2023/bin/universal-darwin"
+    export PATH=$PATH:"/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin"
 fi
+
+tmux-window-name() {
+	($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
+}
+
+add-zsh-hook chpwd tmux-window-name
 
 stty -ixon
 
