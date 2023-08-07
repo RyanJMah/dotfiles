@@ -42,14 +42,14 @@ colors:
 
 font:
   # size for laptop
-  # size: 12.75
+  size: 12.75
 
   # size for monitor
-  size: 13.5
+  # size: 13.5
   
   offset:
     x: 0
-    y: 0
+    y: 1
 
   normal:
     family: ComicCode Nerd Font
@@ -70,7 +70,7 @@ window:
     x: 10
     y: 7
 
-  option_as_alt: "Both"
+  option_as_alt: "OnlyLeft"
 
 key_bindings:
   - {key: Slash, mods: Control, chars: "\x1f"}
