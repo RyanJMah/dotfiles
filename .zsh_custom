@@ -24,7 +24,7 @@ alias ntfy="ntfy -b telegram"
 alias notify="ntfy"
 
 # variables
-export VIRTUAL_ENV_DISABLE_PROMPT=1
+export VIRTUAL_ENV_DISABLE_PROMPT=0
 
 export PATH=$PATH:"$HOME/scripts"
 
@@ -42,7 +42,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
 fi
 
 tmux-window-name() {
-	($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
+	($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &) > /dev/null 2>&1
 }
 
 add-zsh-hook chpwd tmux-window-name
