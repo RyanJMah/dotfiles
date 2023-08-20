@@ -7,9 +7,6 @@
 
     "python.linting.pylintEnabled": false,
     "python.linting.mypyEnabled": true,
-    "python.linting.mypyArgs": [
-        "--check-untyped-defs"
-    ],
     "python.pythonPath": "python3",
 
     "suggest.enablePreselect": true,
