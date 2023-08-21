@@ -27,6 +27,11 @@ set guicursor+=a:blinkon1
 set nomodeline
 set nospell
 
+set foldmethod=indent
+set foldlevel=1
+set foldlevelstart=99
+" set foldclose=all
+
 packadd termdebug
 let g:termdebugger="arm-none-eabi-gdb"
 " let g:termdebugger="gdb"
