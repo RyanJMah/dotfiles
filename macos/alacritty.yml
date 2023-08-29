@@ -5,29 +5,29 @@ colors:
 
   primary:
     foreground: '0xf6f8fa'
-    background: '0x282629'
-    # background: '0x222222'
+    # background: '0x282629'
+    background: '0x222222'
  
   # Normal colors
-  # normal:
-  #   black:   '0x24292e'
-  #   red:     '0xf97583'
-  #   green:   '0x85e89d'
-  #   yellow:  '0xfed484'
-  #   blue:    '0x79b8ff'
-  #   magenta: '0xac82cb'
-  #   cyan:    '0x87ebec'
-  #   white:   '0xf6f8fa'
-
   normal:
     black:   '0x24292e'
-    red:     '0xfc618d'
-    green:   '0x7bd88f'
+    red:     '0xf97583'
+    green:   '0x85e89d'
     yellow:  '0xfed484'
     blue:    '0x79b8ff'
     magenta: '0xac82cb'
     cyan:    '0x5ad4e6'
-    white:   '0xf7f1ff'
+    white:   '0xf6f8fa'
+
+  # normal:
+  #   black:   '0x24292e'
+  #   red:     '0xfc618d'
+  #   green:   '0x7bd88f'
+  #   yellow:  '0xfed484'
+  #   blue:    '0x79b8ff'
+  #   magenta: '0xac82cb'
+  #   cyan:    '0x5ad4e6'
+  #   white:   '0xf7f1ff'
  
   # Bright colors
   bright:
