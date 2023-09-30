@@ -170,5 +170,4 @@
         "statusBar.debuggingForeground": "#F6F8FA"
     },
     "workbench.editor.untitled.hint": "hidden",
-    "C_Cpp.intelliSenseEngine": "disabled"
 }
