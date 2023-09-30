@@ -1,0 +1,43 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+left",
+        "when": "editorTextFocus",
+        "command": "cursorWordEndLeft"
+    },
+    {
+        "key": "ctrl+right",
+        "when": "editorTextFocus",
+        "command": "cursorWordEndRight"
+    },
+    {
+        "key": "ctrl+/",
+        "when": "editorTextFocus",
+        "command": "editor.action.commentLine"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+`",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "ctrl+`",
+        "when": "terminalFocus",
+        "command": "workbench.action.focusActiveEditorGroup"
+    },
+    {
+        "key": "alt+t",
+        "command": "workbench.action.togglePanel"
+    },
+    {
+        "key": "cmd+j",
+        "command": ""
+    },
+    {
+        "key": "ctrl+b",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+]

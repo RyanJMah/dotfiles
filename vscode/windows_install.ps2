@@ -1,0 +1,4 @@
+# copy to %APPDATA%\Code\User\settings.json
+
+cp .\settings.json %APPDATA%\Code\User
+cp .\keybindings.json %APPDATA%\Code\User
