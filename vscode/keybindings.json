@@ -40,4 +40,9 @@
         "key": "ctrl+b",
         "command": "workbench.action.toggleSidebarVisibility"
     },
+    {
+        "key": "cmd+shift+f",
+        "when": "terminalFocus",
+        "command": "workbench.action.toggleMaximizedPanel"
+    }
 ]
