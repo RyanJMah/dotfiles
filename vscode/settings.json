@@ -46,6 +46,7 @@
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.gpuAcceleration": "auto",
     "terminal.integrated.macOptionIsMeta": true,
+    "terminal.integrated.macOptionClickForcesSelection": true,
 
     "git.mergeEditor": false,
 
@@ -67,7 +68,7 @@
     // "vim.statusBarColors.searchinprogressmode": ["#fc9867", "#0d0d0e"],
     // "vim.statusBarColors.commandlineinprogress": ["#fc9867", "#0d0d0e"],
 
-    "vim.scroll": 15,
+    "vim.scroll": 10,
 
     "vim.searchHighlightColor": "#a9dc76",
     "vim.searchMatchColor": "#a9dc76",
@@ -133,6 +134,8 @@
     ],
 
     "clangd.onConfigChanged": "restart",
+
+    "C_Cpp.doxygen.generatedStyle": "/**",
 
     "files.associations": {
         "*.m": "matlab",
