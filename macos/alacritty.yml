@@ -42,7 +42,7 @@ colors:
 
 font:
   # size for laptop
-  size: 12.75
+  size: 12
 
   # size for monitor
   # size: 13.5
