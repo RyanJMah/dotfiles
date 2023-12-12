@@ -6,7 +6,7 @@
     "telemetry.telemetryLevel": "off",
     "extensions.autoUpdate": false,
     
-    "workbench.colorTheme": "Monokai Pro (Filter Spectrum)",
+    "workbench.colorTheme": "Ryan VSCode Theme (Darker)",
     "security.workspace.trust.untrustedFiles": "open",
 
     "editor.fontFamily": "ComicCode Nerd Font",
@@ -35,7 +35,6 @@
     "zenMode.fullScreen": false,
     "zenMode.centerLayout": false,
     "zenMode.hideLineNumbers": false,
-    "zenMode.hideTabs": false,
 
     "explorer.sortOrder": "type",
 
