@@ -3,7 +3,7 @@
     {
         "key": "ctrl+left",
         "when": "editorTextFocus",
-        "command": "cursorWordEndLeft"
+        "command": "cursorWordLeft"
     },
     {
         "key": "ctrl+right",
@@ -44,37 +44,5 @@
         "key": "cmd+shift+f",
         "when": "terminalFocus",
         "command": "workbench.action.toggleMaximizedPanel"
-    },
-    {
-        "key": "alt+h",
-        "command": ""
-    },
-    {
-        "key": "alt+j",
-        "command": ""
-    },
-    {
-        "key": "alt+k",
-        "command": ""
-    },
-    {
-        "key": "alt+l",
-        "command": ""
-    },
-    {
-        "key": "alt+shift+h",
-        "command": ""
-    },
-    {
-        "key": "alt+shift+j",
-        "command": ""
-    },
-    {
-        "key": "alt+shift+k",
-        "command": ""
-    },
-    {
-        "key": "alt+shift+l",
-        "command": ""
     }
 ]

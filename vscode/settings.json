@@ -1,15 +1,9 @@
 {    
-    // For monitor
-    // "editor.fontSize": 13.5,
-    // "terminal.integrated.fontSize": 13,
-
-    // For laptop
     "editor.fontSize": 12.75,
-    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.fontSize": 11,
 
     // TURN OFF TELEMETRY
     "telemetry.telemetryLevel": "off",
-    "update.mode": "none",
     "extensions.autoUpdate": false,
     
     "workbench.colorTheme": "Monokai Pro (Filter Spectrum)",
@@ -24,6 +18,7 @@
     "editor.stickyTabStops": true,
 
     "editor.glyphMargin": true,
+    // "editor.cursorSmoothCaretAnimation": "on",
     "editor.smoothScrolling": true,
     "editor.tabCompletion": "on",
     "editor.acceptSuggestionOnEnter": "smart",
@@ -34,6 +29,8 @@
     "editor.inlineSuggest.enabled": true,
     "editor.inlayHints.enabled": "offUnlessPressed",
 
+    "editor.find.autoFindInSelection": "multiline",
+
     "zenMode.hideStatusBar": false,
     "zenMode.fullScreen": false,
     "zenMode.centerLayout": false,
@@ -41,6 +38,8 @@
     "zenMode.hideTabs": false,
 
     "explorer.sortOrder": "type",
+
+    "search.followSymlinks": false,
 
     "terminal.integrated.cursorStyle": "line",
     "terminal.integrated.cursorBlinking": true,
@@ -68,7 +67,9 @@
     // "vim.statusBarColors.searchinprogressmode": ["#fc9867", "#0d0d0e"],
     // "vim.statusBarColors.commandlineinprogress": ["#fc9867", "#0d0d0e"],
 
-    "vim.scroll": 10,
+    "vim.scroll": 15,
+    
+    "vim.foldfix": true,
 
     "vim.searchHighlightColor": "#a9dc76",
     "vim.searchMatchColor": "#a9dc76",
@@ -167,4 +168,6 @@
         "statusBar.foreground": "#F6F8FA",
         "statusBar.debuggingForeground": "#F6F8FA"
     },
+    "codesnap.transparentBackground": true,
+    "window.commandCenter": false,
 }
