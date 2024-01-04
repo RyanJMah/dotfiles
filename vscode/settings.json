@@ -170,4 +170,5 @@
     },
     "codesnap.transparentBackground": true,
     "window.commandCenter": false,
+    "C_Cpp.intelliSenseEngine": "disabled"
 }

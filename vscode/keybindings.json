@@ -36,10 +36,27 @@
         "key": "cmd+j",
         "command": ""
     },
+    // {
+    //     "key": "ctrl+b",
+    //     "command": "workbench.action.toggleSidebarVisibility"
+    // },
+
     {
         "key": "ctrl+b",
-        "command": "workbench.action.toggleSidebarVisibility"
+        "command": "nerdtree.unfocusSidebarOrClose",
+        "when": "sideBarVisible && filesExplorerFocus"
     },
+    {
+        "key": "ctrl+b",
+        "command": "workbench.files.action.focusFilesExplorer",
+        "when": "sideBarVisible && !filesExplorerFocus && !suggestWidgetVisible && vim.mode != 'Insert'"
+    },
+    {
+        "key": "ctrl+b",
+        "command": "workbench.files.action.focusFilesExplorer",
+        "when": "!sideBarVisible && !suggestWidgetVisible && vim.mode != 'Insert'"
+    },
+
     {
         "key": "cmd+shift+f",
         "when": "terminalFocus",
