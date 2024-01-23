@@ -1,6 +1,12 @@
 {    
-    "editor.fontSize": 12,
-    "terminal.integrated.fontSize": 11,
+    // FOR LAPTOP
+    // "editor.fontSize": 12,
+    // "terminal.integrated.fontSize": 11,
+
+    // FOR DESKTOP
+    "editor.fontSize": 13,
+    "terminal.integrated.fontSize": 12,
+
 
     // TURN OFF TELEMETRY
     "telemetry.telemetryLevel": "off",
@@ -170,5 +176,7 @@
     },
     "codesnap.transparentBackground": true,
     "window.commandCenter": false,
-    "C_Cpp.intelliSenseEngine": "disabled"
+    "C_Cpp.intelliSenseEngine": "disabled",
+
+    "latex-workshop.latex.outDir": "build"
 }
