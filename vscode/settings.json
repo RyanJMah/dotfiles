@@ -147,7 +147,7 @@
     "files.associations": {
         "*.m": "matlab",
         "*.json": "jsonc",
-        "*.c": "cpp"
+        "*.c": "c"
     },
 
     "material-icon-theme.files.associations": {
@@ -177,7 +177,7 @@
     "codesnap.transparentBackground": true,
     "window.commandCenter": false,
     // "C_Cpp.intelliSenseEngine": "disabled",
-    "C_Cpp.errorSquiggles": "disabled",
+    // "C_Cpp.errorSquiggles": "disabled",
 
     "latex-workshop.latex.outDir": "build"
 }
