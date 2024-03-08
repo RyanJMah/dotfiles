@@ -23,6 +23,7 @@
     "editor.detectIndentation": false,
     "editor.stickyTabStops": true,
     "editor.guides.indentation": true,
+    "editor.wordWrap": "off",
 
     "editor.glyphMargin": true,
     // "editor.cursorSmoothCaretAnimation": "on",
@@ -160,7 +161,6 @@
     "terminal.integrated.drawBoldTextInBrightColors": false,
     "terminal.integrated.fontWeightBold": "normal",
     "terminal.integrated.confirmOnExit": "always",
-    "terminal.integrated.enableBell": false,
 
     "workbench.colorCustomizations": {
         "editorBracketMatch.background": "#b6b6b659",
@@ -180,5 +180,11 @@
 
     "latex-workshop.latex.outDir": "build",
     "window.commandCenter": false,
-    "workbench.layoutControl.enabled": false
+    "workbench.layoutControl.enabled": false,
+    "codesnap.showLineNumbers": false,
+    "codesnap.boxShadow": "rgba(0, 0, 0, 0.0) 0px 20px 68px",
+    "accessibility.signals.terminalBell": {
+        "sound": "off"
+    },
+    "terminal.integrated.enableVisualBell": false
 }

@@ -61,5 +61,10 @@
         "key": "cmd+shift+f",
         "when": "terminalFocus",
         "command": "workbench.action.toggleMaximizedPanel"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "-github.copilot.generate",
+        "when": "editorTextFocus && github.copilot.activated && !inInteractiveInput && !interactiveEditorFocused"
     }
 ]
