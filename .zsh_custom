@@ -23,6 +23,8 @@ alias clear="clear && printf '\e[3J'"
 alias ntfy="ntfy -b telegram"
 alias notify="ntfy"
 
+alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+
 # variables
 export VIRTUAL_ENV_DISABLE_PROMPT=0
 
@@ -39,6 +41,10 @@ if [[ $OSTYPE == "darwin"* ]]; then
     export PATH=$PATH:"/Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin"
     export PATH=$PATH:"/usr/local/texlive/2023/bin/universal-darwin"
     export PATH=$PATH:"/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin"
+
+    export PATH=$PATH:"$HOME/.pyenv/bin"
+    eval "$(pyenv virtualenv-init -)"
+    export PATH=$(pyenv root)/shims:$PATH
 fi
 
 tmux-window-name() {
