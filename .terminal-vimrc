@@ -33,8 +33,8 @@ set foldlevelstart=99
 " set foldclose=all
 
 packadd termdebug
-let g:termdebugger="arm-none-eabi-gdb"
-" let g:termdebugger="gdb"
+" let g:termdebugger="arm-none-eabi-gdb"
+let g:termdebugger="gdb"
 
 " detect os and set shell accordingly
 let _os = system('if [[ $OSTYPE == "linux-gnu"* ]]; then echo "linux"; else echo "macos"; fi')
@@ -661,24 +661,18 @@ hi rainbowcol9 guifg=#85c7f2
 "-----------------------------------------------------------------------------------
 " indent blankline
 lua <<EOF
-require("indent_blankline").setup {
+require("ibl").setup()
+
+require("ibl").config = {
     buftype_exclude = {"terminal", "NvimTree"},
     show_first_indent_level = true,
     show_current_context = true,
     show_current_context_start = false,
     -- use_treesitter = true,
-    char = '│',
-    context_char = '▎',
+    -- char = '│',
+    -- context_char = '▎',
 }
 EOF
-let g:indent_blankline_filetype_exclude = [
-    \ "lspinfo",
-    \ "packer",
-    \ "checkhealth",
-    \ "help",
-    \ "man",
-    \ ""
-\]
 "-----------------------------------------------------------------------------------
 
 
