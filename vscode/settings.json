@@ -85,7 +85,7 @@
 
     "vim.enableNeovim": true,
     "vim.neovimUseConfigFile": true,
-    "vim.neovimPath": "/Users/ryanmah/bin/nvim-install/bin/nvim",
+    "vim.neovimPath": "/usr/local/bin/nvim",
 
     "vim.hlsearch": true,
     "vim.incsearch": true,
@@ -187,9 +187,4 @@
         "sound": "off"
     },
     "terminal.integrated.enableVisualBell": false,
-    "[python]": {
-        "diffEditor.ignoreTrimWhitespace": false,
-        "editor.formatOnType": true,
-        "editor.wordBasedSuggestions": "off"
-    }
 }
