@@ -11,6 +11,8 @@ then
     echo "installing homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+    echo; echo "eval \$\(/opt/homebrew/bin/brew shellenv\)" >> $HOME/.zshrc
+
     echo "installed homebrew, please restart the script..."
     exit 0
 fi
