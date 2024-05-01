@@ -15,7 +15,7 @@ fi
 echo "installing nvim..."
 if ! which nvim
 then
-    brew install ninja libtool automake cmake pkg-config gettext curl
+    brew install ninja libtool automake cmake pkg-config gettext curl cmake
 
     ./build_nvim.sh
 fi
