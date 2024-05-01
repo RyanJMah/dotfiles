@@ -127,7 +127,9 @@ class MacOSVirtualMachineInstaller: NSObject {
 
         // Observe installation progress.
         installationObserver = installer.progress.observe(\.fractionCompleted, options: [.initial, .new]) { (progress, change) in
-            NSLog("Installation progress: \(change.newValue! * 100).")
+            // NSLog("Installation progress: \(change.newValue! * 100).")
+            print("Installation progress: \(change.newValue! * 100).", terminator: "\r")
+            fflush(__stdoutp) // Flush the output to ensure it appears immediately
         }
     }
 
