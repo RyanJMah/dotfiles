@@ -4,6 +4,14 @@ THIS_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 echo "starting install..."
 
+# checkk for homebrew
+echo "checking for homebrew..."
+if ! which brew
+then
+    echo "installing homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
 echo "installing nvim..."
 if ! which nvim
 then
