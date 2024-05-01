@@ -10,6 +10,9 @@ if ! which brew
 then
     echo "installing homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    echo "installed homebrew, please restart the script..."
+    exit 0
 fi
 
 echo "installing nvim..."
