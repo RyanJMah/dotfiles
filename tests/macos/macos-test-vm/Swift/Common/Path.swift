@@ -7,7 +7,8 @@ Constants that point to the various file URLs that the sample code uses.
 
 import Foundation
 
-let vmBundlePath = NSHomeDirectory() + "/VM.bundle/"
+let vmBundlePath = FileManager.default.currentDirectoryPath + "/VM.bundle/"
+// let vmBundlePath = NSHomeDirectory() + "/VM.bundle/"
 
 let vmBundleURL = URL(fileURLWithPath: vmBundlePath)
 

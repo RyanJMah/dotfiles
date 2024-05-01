@@ -44,7 +44,9 @@ class MacOSRestoreImage: NSObject {
         }
 
         downloadObserver = downloadTask.progress.observe(\.fractionCompleted, options: [.initial, .new]) { (progress, change) in
-            NSLog("Restore image download progress: \(change.newValue! * 100).")
+            // NSLog("Restore image download progress: \(change.newValue! * 100).")
+            print("Restore image download progress: \(change.newValue! * 100).", terminator: "\r")
+            fflush(__stdoutp) // Flush the output to ensure it appears immediately
         }
         downloadTask.resume()
     }
