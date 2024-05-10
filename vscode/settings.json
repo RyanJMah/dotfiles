@@ -18,6 +18,16 @@
     "editor.fontFamily": "ComicCode Nerd Font",
     "terminal.integrated.fontFamily": "ComicCode Nerd Font",
 
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.gpuAcceleration": "auto",
+    "terminal.integrated.macOptionIsMeta": true,
+    "terminal.integrated.macOptionClickForcesSelection": true,
+    "terminal.integrated.drawBoldTextInBrightColors": false,
+    "terminal.integrated.fontWeightBold": "normal",
+    "terminal.integrated.confirmOnExit": "always",
+    "terminal.integrated.enableVisualBell": false,
+
     "editor.insertSpaces": true,
     "editor.tabSize": 4,
     "editor.detectIndentation": false,
@@ -47,12 +57,6 @@
     "explorer.sortOrder": "type",
 
     "search.followSymlinks": false,
-
-    "terminal.integrated.cursorStyle": "line",
-    "terminal.integrated.cursorBlinking": true,
-    "terminal.integrated.gpuAcceleration": "auto",
-    "terminal.integrated.macOptionIsMeta": true,
-    "terminal.integrated.macOptionClickForcesSelection": true,
 
     "git.mergeEditor": false,
 
@@ -158,10 +162,6 @@
         "inc": "include",
     },
 
-    "terminal.integrated.drawBoldTextInBrightColors": false,
-    "terminal.integrated.fontWeightBold": "normal",
-    "terminal.integrated.confirmOnExit": "always",
-
     "workbench.colorCustomizations": {
         "editorBracketMatch.background": "#b6b6b659",
         "editorBracketHighlight.foreground1": "#FFB86C",
@@ -179,6 +179,7 @@
     // "C_Cpp.errorSquiggles": "disabled",
 
     "latex-workshop.latex.outDir": "build",
+
     "window.commandCenter": false,
     "workbench.layoutControl.enabled": false,
     "codesnap.showLineNumbers": false,
@@ -186,5 +187,4 @@
     "accessibility.signals.terminalBell": {
         "sound": "off"
     },
-    "terminal.integrated.enableVisualBell": false,
 }
